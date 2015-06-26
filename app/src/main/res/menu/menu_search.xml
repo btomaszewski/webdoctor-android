@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- See http://developer.android.com/guide/topics/ui/actionbar.html#ActionItems -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:webdoctor="http://schemas.android.com/apk/res-auto" >
+    <item android:id="@+id/action_search"
+        android:icon="?searchIcon"
+        android:title="@string/search"
+        webdoctor:showAsAction="ifRoom" />
+</menu>
