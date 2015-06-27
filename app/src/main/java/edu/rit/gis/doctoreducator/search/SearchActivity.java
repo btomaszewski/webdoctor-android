@@ -1,7 +1,5 @@
 package edu.rit.gis.doctoreducator.search;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.ComponentName;
@@ -11,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
@@ -21,7 +20,7 @@ import java.util.Collections;
 
 import edu.rit.gis.doctoreducator.R;
 
-public class SearchActivity extends Activity {
+public class SearchActivity extends Activity implements ITaskChanger {
 
     private SearchFrontend mProvider;
     private SearchTask mSearchTask;
@@ -60,6 +59,14 @@ public class SearchActivity extends Activity {
         });
 
         mListView = (ListView) findViewById(R.id.listView);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ISearchResult result = (ISearchResult) mListAdapter.getItem(position);
+                result.open(SearchActivity.this);
+            }
+        });
+
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
         mEmptyMessage = (TextView) findViewById(R.id.empty);
 
@@ -107,6 +114,11 @@ public class SearchActivity extends Activity {
      */
     private void showView(final View view, final boolean show) {
         view.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public Activity getActivity() {
+        return this;
     }
 
     protected class SearchTask extends AsyncTask<Void, Void, Collection<ISearchResult>> {

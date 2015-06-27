@@ -11,9 +11,5 @@ import android.content.Intent;
  */
 public interface ITaskChanger {
 
-    void addFragment(Fragment fragment);
-
-    void startSubActivity(Intent intent);
-
     Activity getActivity();
 }
