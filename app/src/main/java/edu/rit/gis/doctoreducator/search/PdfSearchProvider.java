@@ -1,15 +1,20 @@
 package edu.rit.gis.doctoreducator.search;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.artifex.mupdfdemo.MuPDFActivity;
 import com.artifex.mupdfdemo.MuPDFCore;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -65,7 +70,10 @@ public class PdfSearchProvider extends BaseSearchProvider {
 
         @Override
         public void open(ITaskChanger parent) {
-            // TODO I think I need to rework this...
+            Intent intent = new Intent(parent.getActivity(), MuPDFActivity.class);
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.setData(Uri.fromFile(new File(mFilename)));
+            parent.getActivity().startActivity(intent);
         }
 
         @Override

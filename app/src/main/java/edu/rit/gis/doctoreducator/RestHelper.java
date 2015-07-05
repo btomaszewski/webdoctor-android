@@ -3,12 +3,7 @@ package edu.rit.gis.doctoreducator;
 import android.content.Context;
 import android.util.Log;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -220,7 +215,7 @@ public class RestHelper {
     public String sendGET(URL url) throws IOException {
         HttpURLConnection conn = createGET(url);
         conn.connect();
-        return readStreamToString(conn.getInputStream());
+        return IOUtil.readString(conn.getInputStream());
     }
 
     /**
@@ -266,46 +261,9 @@ public class RestHelper {
         }
         conn.connect();
         if(data != null) {
-            writeStringToStream(conn.getOutputStream(), data);
+            IOUtil.writeString(conn.getOutputStream(), data);
         }
-        return readStreamToString(conn.getInputStream());
-    }
-
-    /**
-     * Read an InputStream and convert it to a String.
-     * Note: this will call close() on the stream.
-     *
-     * @param in - input stream to read
-     * @return a string containing the data from the input stream
-     * @throws IOException - when a read error occurs
-     */
-    public static String readStreamToString(InputStream in) throws IOException {
-        BufferedReader inBus = new BufferedReader(new InputStreamReader(in, UTF_8));
-        StringBuilder sb = new StringBuilder();
-        char[] readBuffer = new char[READ_LENGTH];
-        int length;
-        while( (length = inBus.read(readBuffer)) > 0 ) {
-            sb.append(readBuffer, 0, length);
-        }
-        inBus.close();
-        return sb.toString();
-    }
-
-    /**
-     * Convert String to bytes in UTF-8 and write data to output stream.
-     * Note: this will call close() on the stream.
-     *
-     * @param out - where to write the data
-     * @param data - what data to write
-     * @throws IOException - when things go wrong, and dark clouds fill
-     *                       the sky.
-     */
-    public static void writeStringToStream(OutputStream out, String data)
-            throws IOException {
-        BufferedOutputStream outBus = new BufferedOutputStream(out);
-        byte[] stringData = data.getBytes(UTF_8);
-        outBus.write(stringData);
-        outBus.close();
+        return IOUtil.readString(conn.getInputStream());
     }
 
     /**

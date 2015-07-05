@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DoctorEducator</string>
 
-    <string name="url_base">http://geoapps64.main.ad.rit.edu:9540/</string>
+    <string name="url_base">http://geoapps64.main.ad.rit.edu:1024/</string>
     <string name="shared_prefs_key">edu.rit.gis.doctoreducator.sharedprefs</string>
     <string name="user_agent">Web Doctor Educator (github.com/btomaszewski)</string>
 
@@ -72,5 +72,7 @@
     <string name="prompt_name">Full Name</string>
     <string name="prompt_password_confirm">Password (Confirm)</string>
     <string name="no_results">No results</string>
+    <string name="downloading_content">Downloading content...</string>
+    <string name="downloading_failed">Downloading failed</string>
     <!-- END MuPDF Strings -->
 </resources>

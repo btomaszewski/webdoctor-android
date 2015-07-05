@@ -32,7 +32,7 @@ public class RestConnection {
 
     public void send(String data) throws IOException {
         connection.connect();
-        RestHelper.writeStringToStream(connection.getOutputStream(), data);
+        IOUtil.writeString(connection.getOutputStream(), data);
     }
 
     public void send(JSONObject obj) throws IOException {
@@ -45,7 +45,7 @@ public class RestConnection {
 
     public String receiveString() throws IOException {
         connection.connect();
-        return RestHelper.readStreamToString(connection.getInputStream());
+        return IOUtil.readString(connection.getInputStream());
     }
 
     public void setRequestHeader(String key, String value) {

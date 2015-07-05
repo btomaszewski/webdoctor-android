@@ -14,11 +14,11 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import edu.rit.gis.doctoreducator.IOUtil;
 import edu.rit.gis.doctoreducator.R;
 import edu.rit.gis.doctoreducator.RestHelper;
 
@@ -113,7 +113,7 @@ public class WikipediaSearchProvider extends BaseSearchProvider {
                 "sroffset", Integer.toString(resultOffset));
         HttpURLConnection conn = mRest.createGET(mRest.resolve(query));
         conn.connect();
-        return new JSONObject(RestHelper.readStreamToString(conn.getInputStream()));
+        return new JSONObject(IOUtil.readString(conn.getInputStream()));
     }
 
     private void openWebsite(Context context, String url) {
