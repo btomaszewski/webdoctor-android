@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,12 +16,20 @@ import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 
+import edu.rit.gis.doctoreducator.AssetManager;
 import edu.rit.gis.doctoreducator.R;
 
 public class SearchActivity extends Activity implements ITaskChanger {
+
+    private static final String LOG_TAG = SearchActivity.class.getName();
 
     private SearchFrontend mProvider;
     private SearchTask mSearchTask;
@@ -38,7 +47,7 @@ public class SearchActivity extends Activity implements ITaskChanger {
         setContentView(R.layout.activity_search);
 
         mProvider = new SearchFrontend();
-        mProvider.addProvider(new WikipediaSearchProvider(this));
+        populateProviders();
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         ComponentName searchName = new ComponentName(this, SearchActivity.class);
@@ -74,6 +83,23 @@ public class SearchActivity extends Activity implements ITaskChanger {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = getIntent().getStringExtra(SearchManager.QUERY);
             mSearchView.setQuery(query, true);
+        }
+    }
+
+
+    private void populateProviders() {
+        mProvider.addProvider(new WikipediaSearchProvider(this));
+
+        try {
+            AssetManager assetManager = new AssetManager(this);
+            for (JSONObject obj : assetManager.getCurrentAssets().values()) {
+                if (obj.getString("type").equals("pdf")) {
+                    File file = assetManager.determineFile(obj);
+                    mProvider.addProvider(new PdfSearchProvider(this, file.getAbsolutePath()));
+                }
+            }
+        } catch (IOException|JSONException e) {
+            Log.e(LOG_TAG, e.getMessage(), e);
         }
     }
 

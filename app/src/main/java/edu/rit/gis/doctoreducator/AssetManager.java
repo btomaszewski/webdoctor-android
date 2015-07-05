@@ -3,6 +3,7 @@ package edu.rit.gis.doctoreducator;
 
 import android.content.Context;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -10,6 +11,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -18,10 +20,12 @@ public class AssetManager {
 
     private static final String ASSETS_FILE = "assets.json";
     private static final String ASSET_DIRECTORY = "assets/";
+    private static final String LIST_URL = "content/list?latest=true";
 
     private FileHelper mFileHelper;
     private File mAssetFile;
     private Map<String, JSONObject> mAssetMap;
+    private Context mContext;
 
     public AssetManager(Context context) throws IOException, JSONException {
         this(context, true);
@@ -39,6 +43,7 @@ public class AssetManager {
      * @throws JSONException
      */
     public AssetManager(Context context, boolean read) throws IOException, JSONException {
+        mContext = context;
         mFileHelper = new FileHelper(context);
         mAssetFile = mFileHelper.getFile(ASSETS_FILE);
         if (read) {
@@ -49,7 +54,7 @@ public class AssetManager {
     }
 
     public Map<String, JSONObject> getCurrentAssets() {
-        return new HashMap<>(mAssetMap);
+        return mAssetMap;
     }
 
     /**
@@ -155,5 +160,29 @@ public class AssetManager {
         obj.getString("type");
         obj.getString("file");
         return true;
+    }
+
+    public void updateAllAssets() throws IOException, JSONException {
+        try {
+            RestHelper rest = new RestHelper(mContext.getString(R.string.url_base));
+
+            // first we grab the list of the latest content
+            JSONArray newFilesArray = new JSONArray(rest.sendGET(
+                    rest.resolve(LIST_URL)));
+
+            // now we try to download each of them
+            for (int i = 0; i < newFilesArray.length(); i++) {
+                JSONObject nextFile = newFilesArray.getJSONObject(i);
+                if (isNewVersion(nextFile)) {
+                    // download the file
+                    File output = determineFile(nextFile);
+                    IOUtil.downloadFile(new URL(nextFile.getString("file")), output);
+                    // file is downloaded so update the data
+                    updateAsset(nextFile);
+                }
+            }
+        } finally {
+            save();
+        }
     }
 }

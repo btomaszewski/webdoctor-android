@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 
 import edu.rit.gis.doctoreducator.R;
+import edu.rit.gis.doctoreducator.account.DownloadAssetsActivity;
 import edu.rit.gis.doctoreducator.search.SearchActivity;
 
 
@@ -23,6 +24,10 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        if (getIntent().getBooleanExtra("internet", true)) {
+            startActivity(new Intent(this, DownloadAssetsActivity.class));
+        }
 
         // right now we just pass through to SearchActivity
         startActivity(new Intent(this, SearchActivity.class));

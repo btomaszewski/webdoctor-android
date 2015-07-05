@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
@@ -148,10 +149,17 @@ public class RestHelper {
      */
     public HttpURLConnection createConnection(URL url) throws IOException {
         HttpURLConnection result;
-        if(proxy == null) {
+
+        // proxy support
+        if (proxy == null) {
             result = (HttpURLConnection)url.openConnection();
         } else {
             result = (HttpURLConnection)url.openConnection(proxy);
+        }
+
+        // default timeout should not be never
+        if (result.getConnectTimeout() == 0) {
+            result.setConnectTimeout(2000);
         }
 
         for(Map.Entry<String,String> entry : headers.entrySet()) {
