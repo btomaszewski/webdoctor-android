@@ -31,10 +31,24 @@ public class FileHelper {
 
     public File ensureDirectory(String path) {
         File dir = new File(mRootDirectory, path);
-        if (!dir.exists()) {
-            dir.mkdirs();
+        return ensureDirectory(dir);
+    }
+
+    /**
+     * Ensures that the directory exists. Create it if it doesn't.
+     * Throws a RuntimeException if it fails.
+     *
+     * @param directory - directory to create
+     * @return the directory passed as an argument
+     */
+    private File ensureDirectory(File directory) {
+        if (!directory.exists()) {
+            boolean result = directory.mkdir();
+            if (!result) {
+                throw new RuntimeException("Failed to create directory " + directory);
+            }
         }
-        return dir;
+        return directory;
     }
 
     public File getFile(String path, String name) {
@@ -44,9 +58,7 @@ public class FileHelper {
 
     public File getFile(String pathAndName) {
         File file = new File(mRootDirectory, pathAndName);
-        if (!file.getParentFile().exists()) {
-            file.getParentFile().mkdirs();
-        }
+        ensureDirectory(file.getParentFile());
         return file;
     }
 
