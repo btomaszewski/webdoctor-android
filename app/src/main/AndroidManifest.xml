@@ -9,6 +9,8 @@
 
     <!-- We need the internet to access the server -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- And we need to be able to write to the SD Card -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -43,6 +45,11 @@
                 android:value=".account.AccountMain" />
         </activity>
         <!-- END account-related Activities -->
+
+        <activity
+            android:name=".account.DownloadAssetsActivity"
+            android:label="@string/title_main_activity">
+        </activity>
 
         <activity android:name=".main.MainActivity"
             android:label="@string/title_main_activity" >

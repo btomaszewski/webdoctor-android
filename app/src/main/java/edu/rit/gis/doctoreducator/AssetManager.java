@@ -2,6 +2,7 @@ package edu.rit.gis.doctoreducator;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,6 +19,7 @@ import java.util.Map;
 
 public class AssetManager {
 
+    private static final String LOG_TAG = "AssetManager";
     private static final String ASSETS_FILE = "assets.json";
     private static final String ASSET_DIRECTORY = "assets/";
     private static final String LIST_URL = "content/list?latest=true";
@@ -27,6 +29,9 @@ public class AssetManager {
     private Map<String, JSONObject> mAssetMap;
     private Context mContext;
 
+    /**
+     * Convenience method which calls the other constructor with read=true.
+     */
     public AssetManager(Context context) throws IOException, JSONException {
         this(context, true);
     }
@@ -39,8 +44,8 @@ public class AssetManager {
      *
      * @param context - context necessary to create the FileHelper
      * @param read - read the current asset file or not
-     * @throws IOException
-     * @throws JSONException
+     * @throws IOException - if the file cannot be read
+     * @throws JSONException - if the file is corrupted
      */
     public AssetManager(Context context, boolean read) throws IOException, JSONException {
         mContext = context;
@@ -50,6 +55,28 @@ public class AssetManager {
             mAssetMap = readCurrentAssets();
         } else {
             mAssetMap = new HashMap<>();
+        }
+    }
+
+    /**
+     * Create an asset manager. If an IO or JSON exception is thrown fall
+     * back to creating the asset manager without reading from the file.
+     * This is how clients should usually get an instance of an asset manager.
+     * Exceptions are logged.
+     *
+     * @param context - context (usually Activity instance)
+     * @return a created AssetManager
+     */
+    public static AssetManager createInstance(Context context) {
+        try {
+            return new AssetManager(context, true);
+        } catch (IOException | JSONException e1) {
+            Log.e(LOG_TAG, e1.getMessage(), e1);
+            try {
+                return new AssetManager(context, false);
+            } catch (IOException | JSONException e2) {
+                throw new RuntimeException(e2);
+            }
         }
     }
 
@@ -182,7 +209,11 @@ public class AssetManager {
                 }
             }
         } finally {
-            save();
+            try {
+                save();
+            } catch (IOException e) {
+                Log.e(LOG_TAG, e.getMessage(), e);
+            }
         }
     }
 }

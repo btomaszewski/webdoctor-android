@@ -14,6 +14,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
@@ -22,6 +25,7 @@ import java.net.SocketTimeoutException;
 import java.net.URLClassLoader;
 import java.net.URLConnection;
 
+import edu.rit.gis.doctoreducator.IOUtil;
 import edu.rit.gis.doctoreducator.R;
 import edu.rit.gis.doctoreducator.RestHelper;
 import edu.rit.gis.doctoreducator.main.MainActivity;
@@ -36,7 +40,7 @@ public class AccountMain extends Activity implements View.OnClickListener {
      * We use AccountMain.class.getName() so that if we rename the class
      * the IDE will change LOG_TAG automatically with the refactor.
      */
-    private static final String LOG_TAG = AccountMain.class.getName();
+    private static final String LOG_TAG = AccountMain.class.getSimpleName();
 
     /**
      * Sub-intents should set this as their result code when they succeed at logging in.
@@ -49,6 +53,11 @@ public class AccountMain extends Activity implements View.OnClickListener {
      */
     public static final String AUTH_TOKEN_KEY = "auth-token";
 
+    /**
+     * Name of Shared Preferences
+     */
+    public static final String SHARED_PREFERENCES = "edu.rit.gis.doctoreducator.sharedprefs";
+
     private CheckAuthTask mAuthTask;
 
     private ProgressBar mProgressView;
@@ -56,6 +65,7 @@ public class AccountMain extends Activity implements View.OnClickListener {
     private Button mButtonSignIn;
     private Button mButtonRegister;
     private Button mButtonVerify;
+    private Button mButtonSkip;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,10 +77,12 @@ public class AccountMain extends Activity implements View.OnClickListener {
         mButtonSignIn = (Button) findViewById(R.id.button_sign_in);
         mButtonRegister = (Button) findViewById(R.id.button_register);
         mButtonVerify = (Button) findViewById(R.id.button_verify);
+        mButtonSkip = (Button) findViewById(R.id.button_skip);
 
         mButtonSignIn.setOnClickListener(this);
         mButtonRegister.setOnClickListener(this);
         mButtonVerify.setOnClickListener(this);
+        mButtonSkip.setOnClickListener(this);
 
         showProgress(true);
         attemptLogin();
@@ -95,6 +107,10 @@ public class AccountMain extends Activity implements View.OnClickListener {
             Intent intent = new Intent(this, VerifyActivity.class);
             startActivity(intent);
         }
+
+        if (v == mButtonSkip) {
+            runApp(false);
+        }
     }
 
     @Override
@@ -118,15 +134,7 @@ public class AccountMain extends Activity implements View.OnClickListener {
     }
 
     private void showView(final View view, final boolean show) {
-        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
         view.setVisibility(show ? View.VISIBLE : View.GONE);
-        view.animate().setDuration(shortAnimTime).alpha(
-                show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                view.setVisibility(show ? View.VISIBLE : View.GONE);
-            }
-        });
     }
 
     /**
@@ -148,30 +156,25 @@ public class AccountMain extends Activity implements View.OnClickListener {
      */
     protected class CheckAuthTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String LOG_TAG = getClass().getName();
+        private final String LOG_TAG = getClass().getSimpleName();
 
         @Override
         protected Boolean doInBackground(Void... params) {
             try {
                 SharedPreferences preferences = getSharedPreferences(
-                        getString(R.string.shared_prefs_key), Context.MODE_PRIVATE);
+                        SHARED_PREFERENCES, Context.MODE_PRIVATE);
                 String token = preferences.getString(AUTH_TOKEN_KEY, "");
 
                 RestHelper rest = new RestHelper(AccountMain.this);
-                rest.setHeader("Accept", "application/json");
-                rest.setHeader("Content-type", "application/json");
-                rest.setHeader("Authenticate", "Token " + token);
+                rest.setHeader("Authorization", "Token " + token);
 
-                HttpURLConnection conn = rest.createGET(rest.resolve("/login/test/"));
-                Log.i(LOG_TAG, "Default timeout = " + conn.getConnectTimeout());
-                conn.setConnectTimeout(1000);
-                conn.connect();
-                return conn.getResponseCode() == 200;
+                JSONObject json = new JSONObject(rest.sendGET(rest.resolve("login/test/")));
+                return json.getBoolean("result");
             } catch (SocketException|SocketTimeoutException e) {
                 // no need to do a stack trace for a network error
                 Log.e(LOG_TAG, e.getMessage());
                 return null;
-            } catch (IOException e) {
+            } catch (IOException|JSONException e) {
                 Log.e(LOG_TAG, e.getMessage(), e);
                 return null;
             }
@@ -194,9 +197,19 @@ public class AccountMain extends Activity implements View.OnClickListener {
     }
 
     public void runApp(boolean withInternet) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("internet", withInternet);
+        Intent intent;
+        if (withInternet) {
+            Bundle nextIntent = new Bundle();
+            nextIntent.putBoolean("internet", withInternet);
+            intent = new Intent(this, DownloadAssetsActivity.class);
+            intent.putExtra("next", MainActivity.class.getName());
+            intent.putExtra("nextIntent", nextIntent);
+        } else {
+            intent = new Intent(this, MainActivity.class);
+            intent.putExtra("internet", withInternet);
+        }
         startActivity(intent);
         finish();
+
     }
 }

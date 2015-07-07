@@ -294,7 +294,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 authObject.put("password", mPassword);
 
                 JSONObject result = new JSONObject(rest.sendPOST(
-                        rest.resolve("/login/obtain-auth-token/"),
+                        rest.resolve("login/auth-token/"),
                         authObject.toString()));
 
                 if(result.has("token")) {

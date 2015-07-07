@@ -16,6 +16,9 @@ public class FileHelper {
     private File mRootDirectory;
 
     public FileHelper(Context context) {
+        if (!isExternalStorageWritable()) {
+            throw new RuntimeException("Unable to write to external storage");
+        }
         mRootDirectory = new File(Environment.getExternalStorageDirectory(),
                 DEFAULT_ROOT_DIRECTORY);
         mContext = context;
