@@ -161,19 +161,8 @@ public class AccountMain extends Activity implements View.OnClickListener {
         @Override
         protected Boolean doInBackground(Void... params) {
             try {
-                SharedPreferences preferences = getSharedPreferences(
-                        SHARED_PREFERENCES, Context.MODE_PRIVATE);
-                String token = preferences.getString(AUTH_TOKEN_KEY, "");
-
-                RestHelper rest = new RestHelper(AccountMain.this);
-                rest.setHeader("Authorization", "Token " + token);
-
-                JSONObject json = new JSONObject(rest.sendGET(rest.resolve("login/test/")));
-                return json.getBoolean("result");
-            } catch (SocketException|SocketTimeoutException e) {
-                // no need to do a stack trace for a network error
-                Log.e(LOG_TAG, e.getMessage());
-                return null;
+                AccountHelper helper = new AccountHelper(AccountMain.this);
+                return helper.isAuthenticated();
             } catch (IOException|JSONException e) {
                 Log.e(LOG_TAG, e.getMessage(), e);
                 return null;

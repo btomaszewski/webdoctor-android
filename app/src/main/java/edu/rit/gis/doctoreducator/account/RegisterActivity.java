@@ -18,6 +18,7 @@ import java.io.IOException;
 
 import edu.rit.gis.doctoreducator.R;
 import edu.rit.gis.doctoreducator.RestHelper;
+import edu.rit.gis.doctoreducator.exception.RegistrationException;
 
 public class RegisterActivity extends Activity implements View.OnClickListener {
 
@@ -92,36 +93,10 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
         @Override
         protected Boolean doInBackground(Void... params) {
             try {
-                RestHelper rest = new RestHelper(RegisterActivity.this);
-                rest.setHeader("Accept", "application/json");
-                rest.setHeader("Content-type", "application/json");
-
-                JSONObject authObject = new JSONObject();
-                authObject.put("name", mName);
-                authObject.put("username", mEmail);
-                authObject.put("password", mPassword);
-
-                JSONObject result = new JSONObject(rest.sendPOST(
-                        rest.resolve("/login/register/"),
-                        authObject.toString()));
-
-                if(result.has("token")) {
-                    // we've authenticated so store the token
-                    SharedPreferences preferences = getSharedPreferences(
-                            getString(R.string.shared_prefs_key),
-                            Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString(AccountMain.AUTH_TOKEN_KEY, result.getString("token"));
-                    editor.apply();
-                    return true;
-                } else {
-                    // register failed
-                    if(result.has("error")) {
-                        mError = result.getString("error");
-                    }
-                    return false;
-                }
-            } catch (IOException | JSONException e) {
+                AccountHelper helper = new AccountHelper(RegisterActivity.this);
+                helper.register(mName, mEmail, mPassword);
+                return true;
+            } catch (IOException | JSONException | RegistrationException e) {
                 // report exception and tell user we failed
                 Log.e(LOG_TAG, e.getMessage(), e);
                 mError = e.getMessage();

@@ -5,10 +5,8 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -29,14 +27,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.rit.gis.doctoreducator.R;
-import edu.rit.gis.doctoreducator.RestHelper;
 
 
 /**
@@ -285,30 +281,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         @Override
         protected Boolean doInBackground(Void... params) {
             try {
-                RestHelper rest = new RestHelper(LoginActivity.this);
-                rest.setHeader("Accept", "application/json");
-                rest.setHeader("Content-type", "application/json");
-
-                JSONObject authObject = new JSONObject();
-                authObject.put("username", mEmail);
-                authObject.put("password", mPassword);
-
-                JSONObject result = new JSONObject(rest.sendPOST(
-                        rest.resolve("login/auth-token/"),
-                        authObject.toString()));
-
-                if(result.has("token")) {
-                    // we've authenticated so store the token
-                    SharedPreferences preferences = getSharedPreferences(
-                            getString(R.string.shared_prefs_key), Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString(AccountMain.AUTH_TOKEN_KEY, result.getString("token"));
-                    editor.apply();
-                    return true;
-                } else {
-                    // auth failed
-                    return false;
-                }
+                AccountHelper helper = new AccountHelper(LoginActivity.this);
+                return helper.login(mEmail, mPassword);
             } catch (IOException|JSONException e) {
                 // report exception and tell user we failed
                 Log.e(LOG_TAG, e.getMessage(), e);
