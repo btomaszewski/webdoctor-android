@@ -1,5 +1,8 @@
 # Created by https://www.gitignore.io
 
+# For now don't commit the jniLibs
+app/src/main/jniLibs*
+
 ### Android ###
 # Built application files
 *.apk
