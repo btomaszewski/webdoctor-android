@@ -47,6 +47,11 @@
         <!-- END account-related Activities -->
 
         <activity
+            android:name="com.artifex.mupdfdemo.MuPDFActivity"
+            android:label="@string/title_main_activity">
+        </activity>
+
+        <activity
             android:name=".account.DownloadAssetsActivity"
             android:label="@string/title_main_activity">
         </activity>
