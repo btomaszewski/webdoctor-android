@@ -28,19 +28,17 @@ import java.util.Collections;
 import edu.rit.gis.doctoreducator.AssetManager;
 import edu.rit.gis.doctoreducator.R;
 
-public class SearchActivity extends Activity implements ITaskChanger {
+public class SearchActivity extends Activity implements
+        ITaskChanger, ISearchProvider.SearchListener {
 
-    private static final String LOG_TAG = SearchActivity.class.getName();
+    private static final String LOG_TAG = SearchActivity.class.getSimpleName();
 
     private SearchFrontend mProvider;
-    private SearchTask mSearchTask;
     private SearchListAdapter mListAdapter;
 
     // Views
     private ListView mListView;
     private SearchView mSearchView;
-    private ProgressBar mProgressBar;
-    private TextView mEmptyMessage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,10 +46,9 @@ public class SearchActivity extends Activity implements ITaskChanger {
         setContentView(R.layout.activity_search);
 
         mProvider = new StreamingSearcher();
+        mProvider.setListener(this);
         populateProviders();
 
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        ComponentName searchName = new ComponentName(this, SearchActivity.class);
         mSearchView = (SearchView) findViewById(R.id.searchView);
         mSearchView.setIconifiedByDefault(false);
         mSearchView.setSubmitButtonEnabled(true);
@@ -76,9 +73,6 @@ public class SearchActivity extends Activity implements ITaskChanger {
                 result.open(SearchActivity.this);
             }
         });
-
-        mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
-        mEmptyMessage = (TextView) findViewById(R.id.empty);
 
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
@@ -111,28 +105,13 @@ public class SearchActivity extends Activity implements ITaskChanger {
         return super.onCreateOptionsMenu(menu);
     }
 
-    private void displayResults(Collection<ISearchResult> results) {
-        mSearchTask = null;
-        Toast.makeText(this, R.string.search_complete, Toast.LENGTH_SHORT).show();
-    }
-
     protected void performSearch(String query) {
-        if (mSearchTask == null) {
-            mListAdapter = new SearchListAdapter();
-            mListView.setAdapter(mListAdapter);
-            mSearchTask = new SearchTask(query);
-            mSearchTask.execute();
+        if (mProvider.isSearching()) {
+            mProvider.cancelSearch(true);
         }
-    }
-
-    /**
-     * Show view code copied from AccountMain.
-     *
-     * @param view - view to display or hide
-     * @param show - display the view or hide it
-     */
-    private void showView(final View view, final boolean show) {
-        view.setVisibility(show ? View.VISIBLE : View.GONE);
+        mListAdapter = new SearchListAdapter();
+        mListView.setAdapter(mListAdapter);
+        mProvider.beginSearch(query);
     }
 
     @Override
@@ -140,40 +119,18 @@ public class SearchActivity extends Activity implements ITaskChanger {
         return this;
     }
 
-    protected class SearchTask extends AsyncTask<Void, Void, Collection<ISearchResult>> {
+    @Override
+    public void onSearchComplete(ISearchProvider provider, Collection<ISearchResult> results) {
+        // do nothing
+    }
 
-        private SearchCallable mCallable;
-
-        public SearchTask(String query) {
-            mCallable = new SearchCallable(mProvider, query);
-        }
-
-        @Override
-        protected Collection<ISearchResult> doInBackground(Void... params) {
-            try {
-                return mCallable.call();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Collection<ISearchResult> results) {
-            // display the results
-            displayResults(results);
-        }
-
-        @Override
-        protected void onCancelled() {
-            // display no results
-            // TODO display an actual error for this
-            displayResults(Collections.EMPTY_LIST);
-        }
+    @Override
+    public void onSearchError(ISearchProvider provider, Exception cause) {
+        // also do nothing
     }
 
     /**
-     * Extends SearchFrontend to call back and update the result list as results are
-     * returned.
+     * Extends SearchFrontend to call back and update the result list as results are returned.
      */
     private class StreamingSearcher extends SearchFrontend {
         @Override
