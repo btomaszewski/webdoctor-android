@@ -74,5 +74,6 @@
     <string name="no_results">No results</string>
     <string name="downloading_content">Downloading content...</string>
     <string name="downloading_failed">Downloading failed</string>
+    <string name="search_complete">Search complete</string>
     <!-- END MuPDF Strings -->
 </resources>

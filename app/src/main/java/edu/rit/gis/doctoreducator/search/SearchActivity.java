@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,7 +47,7 @@ public class SearchActivity extends Activity implements ITaskChanger {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        mProvider = new SearchFrontend();
+        mProvider = new StreamingSearcher();
         populateProviders();
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -112,21 +113,13 @@ public class SearchActivity extends Activity implements ITaskChanger {
 
     private void displayResults(Collection<ISearchResult> results) {
         mSearchTask = null;
-        mListAdapter = new SearchListAdapter(results);
-        mListView.setAdapter(mListAdapter);
-        showView(mProgressBar, false);
-        if (mListAdapter.isEmpty()) {
-            showView(mEmptyMessage, true);
-        } else {
-            showView(mListView, true);
-        }
+        Toast.makeText(this, R.string.search_complete, Toast.LENGTH_SHORT).show();
     }
 
     protected void performSearch(String query) {
         if (mSearchTask == null) {
-            showView(mListView, false);
-            showView(mEmptyMessage, false);
-            showView(mProgressBar, true);
+            mListAdapter = new SearchListAdapter();
+            mListView.setAdapter(mListAdapter);
             mSearchTask = new SearchTask(query);
             mSearchTask.execute();
         }
@@ -175,6 +168,24 @@ public class SearchActivity extends Activity implements ITaskChanger {
             // display no results
             // TODO display an actual error for this
             displayResults(Collections.EMPTY_LIST);
+        }
+    }
+
+    /**
+     * Extends SearchFrontend to call back and update the result list as results are
+     * returned.
+     */
+    private class StreamingSearcher extends SearchFrontend {
+        @Override
+        public void onSearchComplete(ISearchProvider provider,
+                                     final Collection<ISearchResult> results) {
+            super.onSearchComplete(provider, results);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mListAdapter.addAll(results);
+                }
+            });
         }
     }
 }

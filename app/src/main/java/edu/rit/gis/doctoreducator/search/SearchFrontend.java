@@ -2,33 +2,34 @@ package edu.rit.gis.doctoreducator.search;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * The backend of the search system. It maintains a list of search providers
  * and acts as the gateway to the search system.
+ * If you extend the class you can access
  */
 public class SearchFrontend implements ISearchProvider, ISearchProvider.SearchListener {
 
-    /**
-     * Tag used for logging
-     */
-    private static final String LOG_TAG = SearchFrontend.class.getName();
+    /** Tag used for logging */
+    private static final String LOG_TAG = SearchFrontend.class.getSimpleName();
 
-    private Set<ISearchProvider> mProviders;
-    private LinkedList<ISearchResult> mResultList;
+    protected Set<ISearchProvider> mProviders;
+    private ArrayList<ISearchResult> mResultList;
     private SearchListener mListener;
     private int mSearchesLeft;
-    private boolean mIsSearching;
+    private AtomicBoolean mIsSearching;
 
     public SearchFrontend() {
         mProviders = new HashSet<>();
-        mResultList = new LinkedList<>();
+        mResultList = new ArrayList<>();
         mSearchesLeft = -1;
-        mIsSearching = false;
+        mIsSearching = new AtomicBoolean(false);
     }
 
     @Override
@@ -36,8 +37,7 @@ public class SearchFrontend implements ISearchProvider, ISearchProvider.SearchLi
         if(mListener == null) {
             throw new IllegalStateException("Listener is null");
         }
-        if(!mIsSearching) {
-            mIsSearching = true;
+        if(mIsSearching.compareAndSet(false, true)) {
             mResultList.clear();
             mSearchesLeft = mProviders.size();
             for(ISearchProvider provider : mProviders) {
@@ -51,8 +51,7 @@ public class SearchFrontend implements ISearchProvider, ISearchProvider.SearchLi
 
     @Override
     public synchronized void cancelSearch(boolean force) {
-        if(mIsSearching) {
-            mIsSearching = false;
+        if(mIsSearching.compareAndSet(true, false)) {
             for(ISearchProvider provider : mProviders) {
                 provider.cancelSearch(force);
             }
@@ -93,12 +92,19 @@ public class SearchFrontend implements ISearchProvider, ISearchProvider.SearchLi
     private void providerCompleted() {
         mSearchesLeft--;
         if(mSearchesLeft == 0) {
-            mIsSearching = false;
+            mIsSearching.compareAndSet(true, false);
             mListener.onSearchComplete(this, mResultList);
         }
     }
 
-    public synchronized Collection<ISearchResult> getResults() {
+    /**
+     * @return if the search frontend is currently searching or has it finished
+     */
+    public boolean isSearching() {
+        return mIsSearching.get();
+    }
+
+    public synchronized List<ISearchResult> getResults() {
         return mResultList;
     }
 }

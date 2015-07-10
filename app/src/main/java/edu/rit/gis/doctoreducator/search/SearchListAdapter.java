@@ -2,6 +2,8 @@ package edu.rit.gis.doctoreducator.search;
 
 import android.database.DataSetObserver;
 import android.graphics.Point;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
@@ -16,13 +18,23 @@ import java.util.List;
  */
 public class SearchListAdapter implements ListAdapter {
 
-    private List<ISearchResult> mResults;
+    private volatile List<ISearchResult> mResults;
     private List<DataSetObserver> mObservers;
+
+    public SearchListAdapter() {
+        mResults = new ArrayList<>();
+        mObservers = new LinkedList<>();
+    }
 
     public SearchListAdapter(Collection<ISearchResult> data) {
         // we need an actual list so we copy the data
         mResults = new ArrayList<>(data);
         mObservers = new LinkedList<>();
+    }
+
+    public void addAll(final Collection<ISearchResult> data) {
+        mResults.addAll(data);
+        callChanged();
     }
 
     @Override
@@ -99,5 +111,11 @@ public class SearchListAdapter implements ListAdapter {
     @Override
     public boolean isEmpty() {
         return mResults.isEmpty();
+    }
+
+    private void callChanged() {
+        for (DataSetObserver dso : mObservers) {
+            dso.onChanged();
+        }
     }
 }
