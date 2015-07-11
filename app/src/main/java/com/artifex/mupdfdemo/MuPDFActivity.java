@@ -358,6 +358,11 @@ public class MuPDFActivity extends Activity implements FilePicker.FilePickerSupp
 		}
 
 		createUI(savedInstanceState);
+
+		// EDIT to allow specifying the start page as an extra
+		int startPage = getIntent().getIntExtra("page", 1);
+		mDocView.setDisplayedViewIndex(startPage);
+		updatePageNumView(startPage);
 	}
 
 	public void requestPassword(final Bundle savedInstanceState) {

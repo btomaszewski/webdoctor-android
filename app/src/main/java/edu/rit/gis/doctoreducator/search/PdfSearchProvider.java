@@ -5,9 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -27,8 +30,11 @@ import java.util.List;
  */
 public class PdfSearchProvider extends BaseSearchProvider {
 
+    private static final String LOG_TAG = "PdfSearchProvider";
+
     private MuPDFCore mPdfFile;
     private String mFilename;
+    private String mQuery;
 
     /**
      * Create a PdfSearchProvider with a new PDF file.
@@ -44,6 +50,7 @@ public class PdfSearchProvider extends BaseSearchProvider {
 
     @Override
     protected Collection<ISearchResult> performSearch(String text) {
+        mQuery = text;
         List<ISearchResult> resultSet = new LinkedList<>();
         for(int page = 0; page < mPdfFile.countPages(); page++) {
             RectF[] results = mPdfFile.searchPage(page, text);
@@ -60,12 +67,16 @@ public class PdfSearchProvider extends BaseSearchProvider {
      */
     protected class PdfSearchResult implements ISearchResult {
 
+        private static final int SIZE_MULTIPLIER = 4;
+
         private RectF mSearchArea;
         private int mPage;
+        private PointF mPageSize;
 
         public PdfSearchResult(int page, RectF searchArea) {
             mPage = page;
             mSearchArea = searchArea;
+            mPageSize = mPdfFile.getPageSize(mPage);
         }
 
         @Override
@@ -73,6 +84,8 @@ public class PdfSearchProvider extends BaseSearchProvider {
             Intent intent = new Intent(parent.getActivity(), MuPDFActivity.class);
             intent.setAction(Intent.ACTION_VIEW);
             intent.setData(Uri.fromFile(new File(mFilename)));
+            intent.putExtra("page", mPage);
+            intent.putExtra("searchText", mQuery);
             parent.getActivity().startActivity(intent);
         }
 
@@ -85,9 +98,9 @@ public class PdfSearchProvider extends BaseSearchProvider {
                 view = new ImageView(context);
             }
 
-            Rect viewArea = new Rect(0, 0, size.x, size.y);
+            Rect viewArea = new Rect(0, 0, size.x, (int) mSearchArea.height() * SIZE_MULTIPLIER);
             int left = (int)(mSearchArea.left - (size.x - mSearchArea.width()) / 2);
-            int top = (int)(mSearchArea.top - (size.y - mSearchArea.height()) / 2);
+            int top = (int)(mSearchArea.top - mSearchArea.height());
 
             // make sure we aren't off the screen
             left = Math.max(left, 0);
@@ -96,9 +109,10 @@ public class PdfSearchProvider extends BaseSearchProvider {
 
             // no idea what a Cookie is but apparently we need it
             MuPDFCore.Cookie cookie = mPdfFile.new Cookie();
-            Bitmap preview = Bitmap.createBitmap(size.x, size.y, Bitmap.Config.ARGB_8888);
-            mPdfFile.drawPage(preview, mPage, size.x, size.y, viewArea.left,
-                    viewArea.top, viewArea.width(), viewArea.height(), cookie);
+            Bitmap preview = Bitmap.createBitmap(viewArea.width(), viewArea.height(),
+                    Bitmap.Config.ARGB_8888);
+            mPdfFile.drawPage(preview, mPage, (int) mPageSize.x, (int) mPageSize.y,
+                    viewArea.left, viewArea.top, viewArea.width(), viewArea.height(), cookie);
             cookie.destroy();
 
             view.setImageBitmap(preview);
