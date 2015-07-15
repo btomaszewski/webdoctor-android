@@ -22,7 +22,7 @@ public class AssetManager {
     private static final String LOG_TAG = "AssetManager";
     private static final String ASSETS_FILE = "assets.json";
     private static final String ASSET_DIRECTORY = "assets/";
-    private static final String LIST_URL = "content/list?latest=true";
+    private static final String LIST_URL = "content/list/?latest=true";
 
     private FileHelper mFileHelper;
     private File mAssetFile;
