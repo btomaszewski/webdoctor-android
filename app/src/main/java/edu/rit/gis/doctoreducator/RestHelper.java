@@ -4,15 +4,17 @@ import android.content.Context;
 import android.util.Log;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+
+import edu.rit.gis.doctoreducator.exception.HttpResponseException;
 
 /**
  * Used to create standard HttpURLConnection objects from a few parameters.
@@ -222,8 +224,7 @@ public class RestHelper {
      */
     public String sendGET(URL url) throws IOException {
         HttpURLConnection conn = createGET(url);
-        conn.connect();
-        return IOUtil.readString(conn.getInputStream());
+        return performNetIO(conn, null, false);
     }
 
     /**
@@ -236,7 +237,7 @@ public class RestHelper {
      */
     public String sendPOST(URL url, String data) throws IOException {
         HttpURLConnection conn = createPOST(url);
-        return dealWithReadWrite(conn, data);
+        return performNetIO(conn, data, false);
     }
 
     /**
@@ -249,29 +250,50 @@ public class RestHelper {
      */
     public String sendPUT(URL url, String data) throws IOException {
         HttpURLConnection conn = createPUT(url);
-        return dealWithReadWrite(conn, data);
+        return performNetIO(conn, data, false);
     }
 
     /**
      * Utility method for dealing with reading and writing data to/from
-     * an HttpURLConnection.
+     * an HttpURLConnection. To only perform a GET make sure data is null.
      *
      * @param conn - The HttpURLConnection to use
      * @param data - Data to send to the server
+     * @param raise - true to raise HttpResponseException, false to return the server response
      * @return a String containing the result from the server
      * @throws IOException - when an internal IO call fails
+     * @throws HttpResponseException - when the response code is not 200 and raise is true
      */
-    public static String dealWithReadWrite(HttpURLConnection conn, String data)
+    public static String performNetIO(HttpURLConnection conn, String data, boolean raise)
             throws IOException {
-        if(data != null) {
-            conn.setDoOutput(true);
-            conn.setFixedLengthStreamingMode(data.length());
+        try {
+            if (data != null) {
+                conn.setDoOutput(true);
+                conn.setFixedLengthStreamingMode(data.length());
+                conn.connect();
+                IOUtil.writeString(conn.getOutputStream(), data);
+            } else {
+                conn.connect();
+            }
+            if (checkResponseCode(conn.getResponseCode(), raise)) {
+                return IOUtil.readString(conn.getInputStream());
+            } else {
+                return IOUtil.readString(conn.getErrorStream());
+            }
+        } finally {
+            conn.disconnect();
         }
-        conn.connect();
-        if(data != null) {
-            IOUtil.writeString(conn.getOutputStream(), data);
+    }
+
+    private static boolean checkResponseCode(int code, boolean raise)
+            throws HttpResponseException {
+        boolean result = code / 100 != 2;
+        if (!result && raise) {
+            // it's not a 20X code so something went wrong
+            throw new HttpResponseException(code);
+        } else {
+            return result;
         }
-        return IOUtil.readString(conn.getInputStream());
     }
 
     /**

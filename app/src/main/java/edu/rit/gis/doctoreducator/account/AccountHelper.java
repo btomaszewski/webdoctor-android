@@ -6,9 +6,11 @@ import android.content.SharedPreferences;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import edu.rit.gis.doctoreducator.RestHelper;
+import edu.rit.gis.doctoreducator.exception.HttpResponseException;
 import edu.rit.gis.doctoreducator.exception.RegistrationException;
 
 /**
@@ -45,9 +47,15 @@ public class AccountHelper {
      */
     public boolean isAuthenticated() throws IOException, JSONException {
         RestHelper rest = new RestHelper(mContext);
-        rest.setHeader("Authorization", "Token " + getAuthToken());
+        String authToken = getAuthToken();
+        if (!authToken.equals("")) {
+            rest.setHeader("Authorization", "Token " + authToken);
+        }
         JSONObject json = new JSONObject(rest.sendGET(rest.resolve("login/test/")));
-        return json.getBoolean("result");
+        // if we have "result" then return that otherwise there was an authentication error
+        // (likely error 401) so return false. If there is a real network error an IOException
+        // will still be thrown by the rest.sendGET method.
+        return json.optBoolean("result", false);
     }
 
     /**
