@@ -46,16 +46,22 @@ public class AccountHelper {
      * @throws JSONException - if the JSON is invalid
      */
     public boolean isAuthenticated() throws IOException, JSONException {
-        RestHelper rest = new RestHelper(mContext);
-        String authToken = getAuthToken();
-        if (!authToken.equals("")) {
-            rest.setHeader("Authorization", "Token " + authToken);
+        try {
+            RestHelper rest = new RestHelper(mContext);
+            String authToken = getAuthToken();
+//            if (!authToken.equals("")) {
+                rest.setHeader("Authorization", "Token " + authToken);
+//            }
+            JSONObject json = new JSONObject(rest.sendGET(rest.resolve("login/test/")));
+            return json.optBoolean("result", false);
+        } catch (HttpResponseException e) {
+            // if 401 (authentication) error then our token was invalid so return false
+            if (e.getErrorCode() == 401) {
+                return false;
+            } else {
+                throw e;
+            }
         }
-        JSONObject json = new JSONObject(rest.sendGET(rest.resolve("login/test/")));
-        // if we have "result" then return that otherwise there was an authentication error
-        // (likely error 401) so return false. If there is a real network error an IOException
-        // will still be thrown by the rest.sendGET method.
-        return json.optBoolean("result", false);
     }
 
     /**

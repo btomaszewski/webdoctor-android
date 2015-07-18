@@ -277,8 +277,10 @@ public class RestHelper {
             }
             if (checkResponseCode(conn.getResponseCode(), raise)) {
                 return IOUtil.readString(conn.getInputStream());
-            } else {
+            } else if (conn.getErrorStream() != null) {
                 return IOUtil.readString(conn.getErrorStream());
+            } else {
+                throw new HttpResponseException(conn.getResponseCode());
             }
         } finally {
             conn.disconnect();
@@ -287,7 +289,7 @@ public class RestHelper {
 
     private static boolean checkResponseCode(int code, boolean raise)
             throws HttpResponseException {
-        boolean result = code / 100 != 2;
+        boolean result = code / 100 == 2;
         if (!result && raise) {
             // it's not a 20X code so something went wrong
             throw new HttpResponseException(code);
