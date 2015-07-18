@@ -69,11 +69,21 @@
     <string name="copy_text">copy text</string>
     <string name="format_currently_not_supported">Format currently not supported</string>
     <string name="toggle_reflow_mode">Toggle reflow mode</string>
+    <!-- END MuPDF Strings -->
+
     <string name="prompt_name">Full Name</string>
     <string name="prompt_password_confirm">Password (Confirm)</string>
     <string name="no_results">No results</string>
-    <string name="downloading_content">Downloading content...</string>
+    <string name="downloading_content">Downloading content…</string>
     <string name="downloading_failed">Downloading failed</string>
     <string name="search_complete">Search complete</string>
-    <!-- END MuPDF Strings -->
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
 </resources>
