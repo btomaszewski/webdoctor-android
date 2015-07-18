@@ -49,9 +49,9 @@ public class AccountHelper {
         try {
             RestHelper rest = new RestHelper(mContext);
             String authToken = getAuthToken();
-//            if (!authToken.equals("")) {
+            if (!authToken.equals("")) {
                 rest.setHeader("Authorization", "Token " + authToken);
-//            }
+            }
             JSONObject json = new JSONObject(rest.sendGET(rest.resolve("login/test/")));
             return json.optBoolean("result", false);
         } catch (HttpResponseException e) {
