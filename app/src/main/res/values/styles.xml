@@ -1,8 +1,17 @@
 <resources>
+    <!-- Note that there are duplicates with android: and without it. This is for
+    compatibility with the support library. Make sure to include both versions. -->
+
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">@style/ActionBarStyle</item>
+        <item name="actionBarStyle">@style/ActionBarStyle</item> <!-- support library -->
+    </style>
+
+    <style name="ActionBarStyle" parent="android:Widget.Holo.ActionBar">
+        <item name="android:background">@color/action_bar_background</item>
+        <item name="background">@color/action_bar_background</item> <!-- support library -->
     </style>
 
 </resources>
