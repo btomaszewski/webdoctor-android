@@ -26,10 +26,12 @@ public class RestHelper {
 
     private final static String LOG_TAG = "RestHelper";
 
-    private static final int READ_LENGTH = 1024 * 2;
+    /** This is the name of the UTF-8 charset which we need for URL encoding */
     private static final String UTF_8 = "UTF-8";
 
+    /** ID for the string with the default Base URL */
     private static final int defaultBaseUrlId = R.string.url_base;
+
 
     /** Holds default headers to add to each request */
     private Map<String,String> headers;
