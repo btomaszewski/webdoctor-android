@@ -1,5 +1,7 @@
 package edu.rit.gis.doctoreducator;
 
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,14 +10,29 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 /**
- * Utility class with a bunch of misc methods with nowhere else to go.
+ * Utility class for a bunch of misc IO methods with nowhere else to go.
+ * You should feel bad for these poor, homeless methods. Maybe give them a home
+ * if you can. Donate money to them, for they are poor and homeless and it would
+ * be charitable of you. These methods regularly go to food shelters to get food
+ * because otherwise they would starve.
  */
 public class IOUtil {
 
+    /** Tag for logging */
+    private static final String LOG_TAG = "IOUtil";
+
+    /** Preferred charset for the application. */
+    private static final String PREFERRED_CHARSET = "UTF-8";
+
+    /** Size (in bytes) of the buffer used for downloading data and copying streams */
     private static final int BUFFER_SIZE = 1024 * 2;
-    private static final String UTF_8 = "UTF-8";
+
+    /** The charset to use when converting Strings to bytes and vice versa */
+    private static Charset appCharset;
+
 
     /**
      * Copy data from the input to the output streams. Note that the caller is responsible for
@@ -75,7 +92,7 @@ public class IOUtil {
      */
     public static void writeString(OutputStream out, String data)
             throws IOException {
-        byte[] stringData = data.getBytes(UTF_8);
+        byte[] stringData = data.getBytes(getCharset());
         out.write(stringData);
         out.close();
     }
@@ -89,7 +106,7 @@ public class IOUtil {
      * @throws IOException - when a read error occurs
      */
     public static String readString(InputStream in) throws IOException {
-        Reader inBus = new InputStreamReader(in, UTF_8);
+        Reader inBus = new InputStreamReader(in, getCharset());
         StringBuilder sb = new StringBuilder();
         char[] readBuffer = new char[BUFFER_SIZE];
         int length;
@@ -98,5 +115,19 @@ public class IOUtil {
         }
         inBus.close();
         return sb.toString();
+    }
+
+    /**
+     * Get the charset to use for converting strings to and from bytes.
+     */
+    public static Charset getCharset() {
+        if (appCharset == null) {
+            appCharset = Charset.forName(PREFERRED_CHARSET);
+            if (appCharset == null) {
+                appCharset = Charset.defaultCharset();
+                Log.w(LOG_TAG, "Preferred charset (" + PREFERRED_CHARSET + ") not available");
+            }
+        }
+        return appCharset;
     }
 }
