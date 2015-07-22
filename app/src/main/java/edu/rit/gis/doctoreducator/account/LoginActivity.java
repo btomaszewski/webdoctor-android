@@ -47,7 +47,7 @@ import edu.rit.gis.doctoreducator.main.MainActivity;
  * Note: Much of this code comes pre-generated and I'm not inclined to change it
  * unless there is a good reason to.
  */
-public class LoginFragment extends Fragment implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     private static final String LOG_TAG = "LoginActivity";
 
@@ -69,11 +69,10 @@ public class LoginFragment extends Fragment implements LoaderCallbacks<Cursor> {
     private View mProgressView;
     private View mLoginFormView;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mRootView = inflater.inflate(R.layout.account_login, container, false);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.account_login);
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -110,12 +109,6 @@ public class LoginFragment extends Fragment implements LoaderCallbacks<Cursor> {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-
-        return mRootView;
-    }
-
-    private View findViewById(int id) {
-        return mRootView.findViewById(id);
     }
 
     @Override
@@ -131,18 +124,11 @@ public class LoginFragment extends Fragment implements LoaderCallbacks<Cursor> {
     }
 
     /**
-     * Called when we finish successfully.
-     */
-    private void finishSuccess() {
-        ((MainActivity) getActivity()).updateAuthenticated();
-    }
-
-    /**
      * Go to the registration activity. This will start the registration activity
      * and wait for a result. The result is handled in {@code onActivityResult}
      */
     public void gotoRegister() {
-        Intent intent = new Intent(getActivity(), RegisterActivity.class);
+        Intent intent = new Intent(this, RegisterActivity.class);
         intent.putExtra(RegisterActivity.EXTRA_EMAIL, mEmailView.getText().toString());
         intent.putExtra(RegisterActivity.EXTRA_PASSWORD, mEmailView.getText().toString());
         startActivityForResult(intent, REQUEST_REGISTER);
@@ -250,7 +236,7 @@ public class LoginFragment extends Fragment implements LoaderCallbacks<Cursor> {
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return new CursorLoader(getActivity(),
+        return new CursorLoader(this,
                 // Retrieve data rows for the device user's 'profile' contact.
                 Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
                         ContactsContract.Contacts.Data.CONTENT_DIRECTORY), ProfileQuery.PROJECTION,
@@ -295,7 +281,7 @@ public class LoginFragment extends Fragment implements LoaderCallbacks<Cursor> {
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(getActivity(),
+                new ArrayAdapter<>(this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);
@@ -326,7 +312,7 @@ public class LoginFragment extends Fragment implements LoaderCallbacks<Cursor> {
         @Override
         protected Boolean doInBackground(Void... params) {
             try {
-                AccountHelper helper = new AccountHelper(getActivity());
+                AccountHelper helper = new AccountHelper(LoginActivity.this);
                 return helper.login(mEmail, mPassword);
             } catch (IOException|JSONException e) {
                 // report exception and tell user we failed
@@ -342,7 +328,8 @@ public class LoginFragment extends Fragment implements LoaderCallbacks<Cursor> {
             showProgress(false);
 
             if (success) {
-                finishSuccess();
+                // nothing to do, really. MainActivity will take care of
+                // things itself so just leave this empty.
             } else {
                 mPasswordView.setError(mError);
                 mPasswordView.requestFocus();

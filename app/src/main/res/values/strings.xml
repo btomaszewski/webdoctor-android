@@ -88,5 +88,6 @@
 
     <string name="loading">Loading…</string>
     <string name="error_passwords_do_not_match">Passwords do not match</string>
+    <string name="action_account">Account</string>
 
 </resources>

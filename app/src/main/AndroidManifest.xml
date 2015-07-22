@@ -18,13 +18,8 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
-        <!-- BEGIN Activity declarations for accounts -->
         <activity
-            android:name=".account.AccountMain"
-            android:label="@string/title_main_activity" >
-        </activity>
-        <activity
-            android:name=".account.LoginFragment"
+            android:name=".account.LoginActivity"
             android:label="@string/title_main_activity"
             android:parentActivityName=".account.AccountMain" >
             <meta-data
@@ -39,8 +34,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".account.AccountMain" />
         </activity>
-        <!-- END account-related Activities -->
-
         <activity
             android:name="com.artifex.mupdfdemo.MuPDFActivity"
             android:label="@string/title_main_activity" >

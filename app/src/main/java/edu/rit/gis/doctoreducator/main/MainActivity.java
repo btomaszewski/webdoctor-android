@@ -15,13 +15,21 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
 import edu.rit.gis.doctoreducator.R;
-import edu.rit.gis.doctoreducator.account.LoginFragment;
+import edu.rit.gis.doctoreducator.account.AccountHelper;
+import edu.rit.gis.doctoreducator.account.LoginActivity;
 import edu.rit.gis.doctoreducator.search.SearchActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-    private static String LOG_TAG = MainActivity.class.getSimpleName();
+    private static String LOG_TAG = "MainActivity";
+
+    /**
+     * Activities should set this as their result to cause MainActivity
+     * to update the Login/Logout menu item along with anything else relevant
+     * to authentication.
+     */
+    public static final int RESULT_UPDATE_AUTHENTICATED = RESULT_FIRST_USER + 0x0CA0;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -32,6 +40,11 @@ public class MainActivity extends AppCompatActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+
+    /**
+     * We keep an instance of this around because we use it a lot.
+     */
+    private AccountHelper mAccountHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +59,8 @@ public class MainActivity extends AppCompatActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        mAccountHelper = new AccountHelper(this);
     }
 
     @Override
@@ -55,10 +70,8 @@ public class MainActivity extends AppCompatActivity
         switch (position) {
             case 0:
             case 1:
-                nextFragment = PlaceholderFragment.newInstance(position + 1);
-                break;
             case 2:
-                nextFragment = new LoginFragment();
+                nextFragment = PlaceholderFragment.newInstance(position + 1);
                 break;
             default:
                 // ABORT!
@@ -92,15 +105,6 @@ public class MainActivity extends AppCompatActivity
         actionBar.setTitle(mTitle);
     }
 
-    /**
-     * Called to have the MainActivity update its status on if the user is
-     * authenticated or not. Usually called by LoginActivity or RegisterActivity
-     */
-    public void updateAuthenticated() {
-        mNavigationDrawerFragment.updateSectionNames();
-    }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
@@ -115,18 +119,40 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem miLogin = menu.findItem(R.id.action_login);
+        MenuItem miLogout = menu.findItem(R.id.action_logout);
+        if (miLogin != null) {
+            boolean auth = mAccountHelper.isAuthenticated();
+            miLogin.setVisible(!auth);
+            miLogout.setVisible(auth);
+        }
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        switch (id) {
+        case R.id.action_settings:
             return true;
-        }
-        if (id == R.id.action_search) {
+
+        case R.id.action_login:
+            startActivity(new Intent(this, LoginActivity.class));
+            break;
+
+        case R.id.action_logout:
+            mAccountHelper.logout();
+            break;
+
+        case R.id.action_search:
             startActivity(new Intent(this, SearchActivity.class));
+            break;
         }
 
         return super.onOptionsItemSelected(item);
