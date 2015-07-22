@@ -7,6 +7,8 @@
     <string name="action_register">Register</string>
     <string name="action_verify">Verify Account</string>
     <string name="action_skip">Skip</string>
+    <string name="action_login">Login</string>
+    <string name="action_logout">Logout</string>
 
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>

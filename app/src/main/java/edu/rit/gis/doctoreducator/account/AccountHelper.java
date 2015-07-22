@@ -28,24 +28,69 @@ public class AccountHelper {
      */
     public static final String SHARED_PREFERENCES = "edu.rit.gis.doctoreducator.sharedprefs";
 
-    // BEGIN PRIVATE VARIABLES
 
+    // These parts of the class are static but are private so you still need
+    // to create an instance of the class to access them
+
+    /**
+     * Have we already tried to authenticate via the internet
+     */
+    private static boolean hasTriedAuthentication = false;
+
+    /**
+     * Are we authenticated.
+     */
+    private static boolean hasAuthenticated = false;
+
+    /**
+     * Non-static Context for accessing the shared preferences
+     */
     private Context mContext;
-
-    // END PRIVATE VARIABLES
 
     public AccountHelper(Context context) {
         mContext = context;
     }
 
+
     /**
-     * Test to see if our stored credentials allow us to authenticate.
+     * Check to see if we've authenticated. Only uses cached value and does not attempt
+     * to communicate with the server.
+     *
+     * This is mostly useful if you are sure {@code testAuthentication} has been called
+     * at least once.
+     *
+     * @return true if we've authenticated false if not
+     */
+    public boolean isAuthenticated() {
+        return hasAuthenticated;
+    }
+
+    /**
+     * Check to see if we've authenticated. If we have already attempted authenticated then
+     * return the result of that, if not run {@code testAuthentication()} and return the result
+     * of that.
+     *
+     * @return true if we've authenticated
+     * @throws IOException - when testAuthentication throws an IOException
+     * @throws JSONException - when testAuthentication throws a JSONException
+     */
+    public boolean isAuthenticated(boolean testIfNot) throws IOException, JSONException {
+        if (hasTriedAuthentication || !testIfNot) {
+            return hasAuthenticated;
+        } else {
+            return testAuthentication();
+        }
+    }
+
+    /**
+     * Test to see if our stored credentials allow us to authenticate. This always
+     * accesses the server and checks stored credentials.
      *
      * @return true if we can authenticate, false otherwise
      * @throws IOException - when an IO error occurs
      * @throws JSONException - if the JSON is invalid
      */
-    public boolean isAuthenticated() throws IOException, JSONException {
+    public boolean testAuthentication() throws IOException, JSONException {
         try {
             RestHelper rest = new RestHelper(mContext);
             String authToken = getAuthToken();
@@ -53,15 +98,17 @@ public class AccountHelper {
                 rest.setHeader("Authorization", "Token " + authToken);
             }
             JSONObject json = new JSONObject(rest.sendGET(rest.resolve("login/test/")));
-            return json.optBoolean("result", false);
+            setAuthenticated(json.optBoolean("result", false));
         } catch (HttpResponseException e) {
-            // if 401 (authentication) error then our token was invalid so return false
+            // if 401 (authentication) error then our token was invalid so
+            // set result to false
             if (e.getErrorCode() == 401) {
-                return false;
+                setAuthenticated(true);
             } else {
                 throw e;
             }
         }
+        return hasAuthenticated;
     }
 
     /**
@@ -89,6 +136,7 @@ public class AccountHelper {
         if(result.has("token")) {
             // we've authenticated so store the token
             setAuthToken(result.getString("token"));
+            setAuthenticated(true);
             return true;
         } else {
             // auth failed
@@ -125,6 +173,7 @@ public class AccountHelper {
         if(result.has("token")) {
             // we've authenticated so store the token
             setAuthToken(result.getString("token"));
+            setAuthenticated(true);
         } else {
             // register failed
             if(result.has("error")) {
@@ -133,6 +182,15 @@ public class AccountHelper {
                 throw new RegistrationException("Registration failed");
             }
         }
+    }
+
+    /**
+     * Reset the stored authentication token. Yep. That's really all this does.
+     * This effectively logs you out of the system.
+     */
+    public void logout() {
+        setAuthToken("");
+        setAuthenticated(false);
     }
 
     /**
@@ -153,8 +211,17 @@ public class AccountHelper {
     private void setAuthToken(String token) {
         SharedPreferences preferences = mContext.getSharedPreferences(
                 SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(AccountMain.AUTH_TOKEN_KEY, token);
-        editor.apply();
+        preferences.edit().putString(AUTH_TOKEN_KEY, token).apply();
+    }
+
+    /**
+     * Set if we have successfully authenticated with the server. This will
+     * set hasTriedAuthenticated to true and set hasAuthenticated to auth.
+     *
+     * @param auth - did we authenticate successfully
+     */
+    private void setAuthenticated(boolean auth) {
+        hasTriedAuthentication = true;
+        hasAuthenticated = auth;
     }
 }

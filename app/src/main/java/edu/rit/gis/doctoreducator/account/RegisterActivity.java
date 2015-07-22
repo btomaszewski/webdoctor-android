@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
@@ -20,9 +21,18 @@ import edu.rit.gis.doctoreducator.R;
 import edu.rit.gis.doctoreducator.RestHelper;
 import edu.rit.gis.doctoreducator.exception.RegistrationException;
 
+/**
+ * Activity for registering new users. The Activity handles two extras from the Intent:
+ * {@code email} and {@code password}. These will be used to fill in the email and password
+ * fields respectively if they are supplied however they are optional. The user can still
+ * change the email and password, these extras just supply default values.
+ */
 public class RegisterActivity extends Activity implements View.OnClickListener {
 
     private static final String LOG_TAG = "RegisterActivity";
+
+    public static final String EXTRA_EMAIL = "email";
+    public static final String EXTRA_PASSWORD = "password";
 
     private UserRegisterTask mRegisterTask;
 
@@ -45,6 +55,13 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
         mRegisterButton = (Button) findViewById(R.id.button_register);
 
         mRegisterButton.setOnClickListener(this);
+
+        if (getIntent().hasExtra(EXTRA_EMAIL)) {
+            mEmailView.setText(getIntent().getStringExtra(EXTRA_EMAIL));
+        }
+        if (getIntent().hasExtra(EXTRA_PASSWORD)) {
+            mEmailView.setText(getIntent().getStringExtra(EXTRA_PASSWORD));
+        }
     }
 
     @Override
@@ -54,21 +71,60 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    /**
+     * Check the fields and see if we are good to go. If we are then try to
+     * register the new account.
+     */
     private void attemptRegister() {
-        String pass1 = mPasswordView.getText().toString();
-        String pass2 = mPasswordConfirmView.getText().toString();
-        Log.i(LOG_TAG, pass1);
-        Log.i(LOG_TAG, pass2);
-        if(pass1.equals(pass2)) {
-            String name = mNameView.getText().toString();
-            String email = mEmailView.getText().toString();
-            mRegisterTask = new UserRegisterTask(name, email, pass1);
+        if (mRegisterTask != null) {
+            return;
+        }
+
+        // Reset errors
+        mNameView.setError(null);
+        mEmailView.setError(null);
+        mPasswordView.setError(null);
+        mPasswordConfirmView.setError(null);
+
+        boolean hasError = false;
+        String password = mPasswordView.getText().toString();
+        String name = mNameView.getText().toString();
+        String email = mEmailView.getText().toString();
+
+        // Check for required fields
+        // |= is or-equals: like plus-equals (+=) but with or (||)
+        hasError |= checkEmpty(mNameView);
+        hasError |= checkEmpty(mEmailView);
+        hasError |= checkEmpty(mPasswordView);
+        hasError |= checkEmpty(mPasswordConfirmView);
+
+        // Check if passwords match
+        if (!TextUtils.equals(password, mPasswordConfirmView.getText())) {
+            mPasswordConfirmView.setError(getString(R.string.error_passwords_do_not_match));
+            hasError = false;
+        }
+
+        // if there was no error then start the task
+        if (!hasError) {
+            mRegisterTask = new UserRegisterTask(name, email, password);
             mRegisterTask.execute();
-        } else {
-            mPasswordView.setError("Passwords do not match");
         }
     }
 
+    /**
+     * Check if {@code view} is empty and if it is set it's error to error_field_required.
+     *
+     * @param view - the EditText to check
+     * @return true if the field is empty, false otherwise
+     */
+    private boolean checkEmpty(EditText view) {
+        if (TextUtils.isEmpty(view.getText())) {
+            view.setError(getString(R.string.error_field_required));
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /**
      * Represents an asynchronous registration task used to authenticate
@@ -107,10 +163,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
         @Override
         protected void onPostExecute(final Boolean success) {
             mRegisterTask = null;
-//            showProgress(false);
-
             if (success) {
-                setResult(AccountMain.RESULT_AUTH_SUCCESS);
+                // setResult(AccountMain.RESULT_AUTH_SUCCESS);
                 finish();
             } else {
                 mPasswordView.setError(mError);
@@ -121,7 +175,6 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
         @Override
         protected void onCancelled() {
             mRegisterTask = null;
-//            showProgress(false);
         }
     }
 }

@@ -21,7 +21,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.Arrays;
+
 import edu.rit.gis.doctoreducator.R;
+import edu.rit.gis.doctoreducator.account.AccountHelper;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -98,21 +101,39 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<>(
-                getActionBar().getThemedContext(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                new String[]{
-                        getString(R.string.title_section1),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
-                }));
+        updateSectionNames();
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
 
     public boolean isDrawerOpen() {
         return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mFragmentContainerView);
+    }
+
+    /**
+     * Changing this method allows dynamically selecting the section name.
+     * Then again that's probably a bad idea.
+     *
+     * @return String array of section names
+     */
+    private String[] determineSectionNames() {
+        return new String[] {
+                getString(R.string.title_section1),
+                getString(R.string.title_section2),
+                getString(R.string.title_section3),
+        };
+    }
+
+    /**
+     * Updates the list of strings which represent the sections in the navigation drawer.
+     */
+    public void updateSectionNames() {
+        mDrawerListView.setAdapter(new ArrayAdapter<>(
+                getActionBar().getThemedContext(),
+                android.R.layout.simple_list_item_activated_1,
+                android.R.id.text1,
+                determineSectionNames()
+        ));
     }
 
     /**

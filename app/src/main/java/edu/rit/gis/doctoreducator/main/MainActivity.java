@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
 import edu.rit.gis.doctoreducator.R;
+import edu.rit.gis.doctoreducator.account.LoginFragment;
 import edu.rit.gis.doctoreducator.search.SearchActivity;
 
 public class MainActivity extends AppCompatActivity
@@ -50,9 +51,22 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
+        Fragment nextFragment = null;
+        switch (position) {
+            case 0:
+            case 1:
+                nextFragment = PlaceholderFragment.newInstance(position + 1);
+                break;
+            case 2:
+                nextFragment = new LoginFragment();
+                break;
+            default:
+                // ABORT!
+                return;
+        }
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, nextFragment)
                 .commit();
     }
 
@@ -76,6 +90,14 @@ public class MainActivity extends AppCompatActivity
 //        actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setHomeButtonEnabled(true);
         actionBar.setTitle(mTitle);
+    }
+
+    /**
+     * Called to have the MainActivity update its status on if the user is
+     * authenticated or not. Usually called by LoginActivity or RegisterActivity
+     */
+    public void updateAuthenticated() {
+        mNavigationDrawerFragment.updateSectionNames();
     }
 
 
