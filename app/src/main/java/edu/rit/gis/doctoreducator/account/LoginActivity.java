@@ -328,8 +328,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             showProgress(false);
 
             if (success) {
-                // nothing to do, really. MainActivity will take care of
-                // things itself so just leave this empty.
+                // MainActivity will take care of updating itself so just finish
+                finish();
             } else {
                 mPasswordView.setError(mError);
                 mPasswordView.requestFocus();

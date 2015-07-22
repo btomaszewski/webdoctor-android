@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import edu.rit.gis.doctoreducator.IOUtil;
 import edu.rit.gis.doctoreducator.RestHelper;
 import edu.rit.gis.doctoreducator.exception.HttpResponseException;
 import edu.rit.gis.doctoreducator.exception.RegistrationException;
@@ -92,7 +93,7 @@ public class AccountHelper {
      */
     public boolean testAuthentication() throws IOException, JSONException {
         try {
-            RestHelper rest = new RestHelper(mContext);
+            RestHelper rest = IOUtil.configureJson(new RestHelper(mContext));
             String authToken = getAuthToken();
             if (!authToken.equals("")) {
                 rest.setHeader("Authorization", "Token " + authToken);
@@ -123,7 +124,7 @@ public class AccountHelper {
      * @throws JSONException - if the JSON is invalid
      */
     public boolean login(String email, String password) throws IOException, JSONException {
-        RestHelper rest = new RestHelper(mContext);
+        RestHelper rest = IOUtil.configureJson(new RestHelper(mContext));
 
         JSONObject authObject = new JSONObject();
         authObject.put("username", email);
@@ -159,7 +160,7 @@ public class AccountHelper {
      */
     public void register(String name, String email, String password)
         throws IOException, JSONException, RegistrationException {
-        RestHelper rest = new RestHelper(mContext);
+        RestHelper rest = IOUtil.configureJson(new RestHelper(mContext));
 
         JSONObject authObject = new JSONObject();
         authObject.put("name", name);

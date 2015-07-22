@@ -191,7 +191,7 @@ public class AssetManager {
 
     public void updateAllAssets() throws IOException, JSONException {
         try {
-            RestHelper rest = new RestHelper(mContext.getString(R.string.url_base));
+            RestHelper rest = IOUtil.configureJson(new RestHelper(mContext));
 
             // first we grab the list of the latest content
             JSONArray newFilesArray = new JSONArray(rest.sendGET(

@@ -11,6 +11,8 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.IllegalCharsetNameException;
+import java.nio.charset.UnsupportedCharsetException;
 
 /**
  * Utility class for a bunch of misc IO methods with nowhere else to go.
@@ -122,12 +124,33 @@ public class IOUtil {
      */
     public static Charset getCharset() {
         if (appCharset == null) {
-            appCharset = Charset.forName(PREFERRED_CHARSET);
-            if (appCharset == null) {
+            try {
+                appCharset = Charset.forName(PREFERRED_CHARSET);
+            } catch (IllegalCharsetNameException | UnsupportedCharsetException e) {
                 appCharset = Charset.defaultCharset();
                 Log.w(LOG_TAG, "Preferred charset (" + PREFERRED_CHARSET + ") not available");
             }
         }
         return appCharset;
+    }
+
+    /**
+     * Convenience method to get the name of the charset we're using.
+     */
+    public static String getCharsetName() {
+        return getCharset().name();
+    }
+
+    /**
+     * Configure the RestHelper to send and receive json data. This sets
+     * the Content-Type and Accept headers.
+     *
+     * @param helper - helper to configure
+     * @return the helper
+     */
+    public static RestHelper configureJson(RestHelper helper) {
+        helper.setHeader("Content-Type", "application/json");
+        helper.setHeader("Accept", "application/json");
+        return helper;
     }
 }
