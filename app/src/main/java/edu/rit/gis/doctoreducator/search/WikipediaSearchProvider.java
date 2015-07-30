@@ -17,6 +17,7 @@ import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
 import edu.rit.gis.doctoreducator.IOUtil;
 import edu.rit.gis.doctoreducator.R;
@@ -32,6 +33,27 @@ import edu.rit.gis.doctoreducator.RestHelper;
  * The api url for a given wiki site may not be the same.
  */
 public class WikipediaSearchProvider extends BaseSearchProvider {
+
+    /**
+     * Languages accepted because they have sufficient wikipedia entries.
+     * Other country code such as "rw" (Rwanda) don't have many entries so
+     * they don't return good results.
+     */
+    private static final String[] ACCEPTED_LANGUAGES = {"fr", "en", "de"};
+
+    /**
+     * Format string for the wikipedia api url. The %s should be replaced with the
+     * country code.
+     */
+    private static final String WIKIPEDIA_API_URL = "https://%s.wikipedia.org/w/api.php";
+
+    /**
+     * Format string for the wikipedia wiki url. This is the base url for all of
+     * the articles. The %s is for the country code.
+     * {@link String#format}
+     */
+    private static final String WIKIPEDIA_WIKI_URL = "https://%s.wikipedia.org/wiki/";
+
 
     /** Number of search results to ask for at once.
      * This is a string because it has to be. */
@@ -50,8 +72,11 @@ public class WikipediaSearchProvider extends BaseSearchProvider {
      * @param context - context used to get the user-agent from R.string.user_agent
      */
     public WikipediaSearchProvider(Context context) {
-        this("https://en.wikipedia.org/w/api.php", "https://en.wikipedia.org/wiki/",
-                context.getString(R.string.user_agent));
+        String countryCode = getCountryCode();
+        mRest = new RestHelper(String.format(WIKIPEDIA_API_URL, countryCode));
+        mRest.setHeader("User-Agent", context.getString(R.string.user_agent));
+        mRest.setHeader("Accept", "application/json");
+        mWikiUrl = String.format(WIKIPEDIA_WIKI_URL, countryCode);
     }
 
     /**
@@ -67,6 +92,23 @@ public class WikipediaSearchProvider extends BaseSearchProvider {
         mRest.setHeader("User-Agent", userAgent);
         mRest.setHeader("Accept", "application/json");
         mWikiUrl = wikiUrl;
+    }
+
+    /**
+     * Determines the country code to use by checking the user's preferred language.
+     * @return two-character country-code string
+     */
+    private static String getCountryCode() {
+        // get ISO country-code (2 characters)
+        String systemLanguage = Locale.getDefault().getDisplayLanguage();
+        // if language is in list of approved languages then use it
+        for (String lang : ACCEPTED_LANGUAGES) {
+            if (systemLanguage.equals(lang)) {
+                return lang;
+            }
+        }
+        // default to english
+        return "en";
     }
 
     @Override
