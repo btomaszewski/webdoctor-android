@@ -3,7 +3,6 @@
 
     <string name="url_base">http://geoapps64.main.ad.rit.edu:1024/</string>
     <string name="shared_prefs_key">edu.rit.gis.doctoreducator.sharedprefs</string>
-    <string name="user_agent">Web Doctor Educator (github.com/btomaszewski)</string>
 
     <string name="title_main_activity">Doctor Educator</string>
     <string name="action_settings">Settings</string>

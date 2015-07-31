@@ -26,6 +26,9 @@ public class RestHelper {
 
     private final static String LOG_TAG = "RestHelper";
 
+    /** Default user agent string for the Rest Helper */
+    public static final String USER_AGENT = "Web Doctor Educator (github.com/btomaszewski)";
+
     /** This is the name of the UTF-8 charset which we need for URL encoding */
     private static final String UTF_8 = "UTF-8";
 
@@ -56,6 +59,7 @@ public class RestHelper {
         context = null;
         baseURL = "";
         proxy = null;
+        setHeader("User-Agent", USER_AGENT);
     }
 
     public RestHelper(Context ctx) {

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
@@ -74,7 +75,6 @@ public class WikipediaSearchProvider extends BaseSearchProvider {
     public WikipediaSearchProvider(Context context) {
         String countryCode = getCountryCode();
         mRest = new RestHelper(String.format(WIKIPEDIA_API_URL, countryCode));
-        mRest.setHeader("User-Agent", context.getString(R.string.user_agent));
         mRest.setHeader("Accept", "application/json");
         mWikiUrl = String.format(WIKIPEDIA_WIKI_URL, countryCode);
     }
@@ -85,11 +85,9 @@ public class WikipediaSearchProvider extends BaseSearchProvider {
      *
      * @param apiUrl - url for accessing the mediawiki api
      * @param wikiUrl - base url to use when creating the url for a particular page
-     * @param userAgent - the user-agent to use when making requests from the mediawiki api
      */
-    public WikipediaSearchProvider(String apiUrl, String wikiUrl, String userAgent) {
+    public WikipediaSearchProvider(String apiUrl, String wikiUrl) {
         mRest = new RestHelper(apiUrl);
-        mRest.setHeader("User-Agent", userAgent);
         mRest.setHeader("Accept", "application/json");
         mWikiUrl = wikiUrl;
     }
