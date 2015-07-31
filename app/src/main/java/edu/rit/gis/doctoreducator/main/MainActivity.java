@@ -3,6 +3,9 @@ package edu.rit.gis.doctoreducator.main;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.SearchManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.SearchView;
 
 import edu.rit.gis.doctoreducator.R;
 import edu.rit.gis.doctoreducator.account.AccountHelper;
@@ -112,6 +116,15 @@ public class MainActivity extends AppCompatActivity
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.main, menu);
+
+            // initialize the search widget
+            SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+            MenuItem miSearch = menu.findItem(R.id.action_search);
+            ComponentName searchableName = new ComponentName(this, SearchActivity.class);
+            SearchView searchView = (SearchView) miSearch.getActionView();
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(searchableName));
+            searchView.setIconifiedByDefault(false);
+
             restoreActionBar();
             return true;
         }
@@ -151,7 +164,7 @@ public class MainActivity extends AppCompatActivity
             break;
 
         case R.id.action_search:
-            startActivity(new Intent(this, SearchActivity.class));
+//            startActivity(new Intent(this, SearchActivity.class));
             break;
         }
 
