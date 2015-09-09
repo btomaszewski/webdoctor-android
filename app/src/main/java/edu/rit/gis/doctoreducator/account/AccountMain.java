@@ -55,7 +55,7 @@ public class AccountMain extends Activity implements View.OnClickListener {
     private TextView mTextDisplay;
     private Button mButtonSignIn;
     private Button mButtonRegister;
-    private Button mButtonVerify;
+//    private Button mButtonVerify;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,11 +66,11 @@ public class AccountMain extends Activity implements View.OnClickListener {
         mTextDisplay = (TextView) findViewById(R.id.text_display);
         mButtonSignIn = (Button) findViewById(R.id.button_sign_in);
         mButtonRegister = (Button) findViewById(R.id.button_register);
-        mButtonVerify = (Button) findViewById(R.id.button_verify);
+//        mButtonVerify = (Button) findViewById(R.id.button_verify);
 
         mButtonSignIn.setOnClickListener(this);
         mButtonRegister.setOnClickListener(this);
-        mButtonVerify.setOnClickListener(this);
+//        mButtonVerify.setOnClickListener(this);
 
         showProgress(true);
         attemptLogin();
@@ -91,10 +91,10 @@ public class AccountMain extends Activity implements View.OnClickListener {
         }
 
         // if they pressed Verify
-        if(v == mButtonVerify) {
-            Intent intent = new Intent(this, VerifyActivity.class);
-            startActivity(intent);
-        }
+//        if(v == mButtonVerify) {
+//            Intent intent = new Intent(this, VerifyActivity.class);
+//            startActivity(intent);
+//        }
     }
 
     @Override
@@ -113,7 +113,7 @@ public class AccountMain extends Activity implements View.OnClickListener {
         showView(mTextDisplay, !show);
         showView(mButtonSignIn, !show);
         showView(mButtonRegister, !show);
-        showView(mButtonVerify, !show);
+//        showView(mButtonVerify, !show);
         showView(mProgressView, show);
     }
 
