@@ -18,10 +18,12 @@ public class FileHelper {
     public FileHelper(Context context) {
         if (!isExternalStorageWritable()) {
             throw new RuntimeException("Unable to write to external storage");
+        } else {
+            mRootDirectory = new File(Environment.getExternalStorageDirectory(),
+                    DEFAULT_ROOT_DIRECTORY);
+            mContext = context;
+            return;
         }
-        mRootDirectory = new File(Environment.getExternalStorageDirectory(),
-                DEFAULT_ROOT_DIRECTORY);
-        mContext = context;
     }
 
     public FileHelper(Context context, File rootDirectory) {
@@ -30,8 +32,7 @@ public class FileHelper {
     }
 
     public File ensureDirectory(String path) {
-        File dir = new File(mRootDirectory, path);
-        return ensureDirectory(dir);
+        return ensureDirectory(new File(mRootDirectory, path));
     }
 
     /**

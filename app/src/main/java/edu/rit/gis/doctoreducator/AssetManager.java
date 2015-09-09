@@ -53,8 +53,10 @@ public class AssetManager {
         mAssetFile = mFileHelper.getFile(ASSETS_FILE);
         if (read) {
             mAssetMap = readCurrentAssets();
+            return;
         } else {
             mAssetMap = new HashMap<>();
+            return;
         }
     }
 
