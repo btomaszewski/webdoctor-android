@@ -79,8 +79,10 @@
     <string name="search_complete">Search complete</string>
 
     <string name="title_section1">Home</string>
-    <string name="title_section2">My Saved Notes</string>
+    <string name="title_section2">Medical Info</string>
     <string name="title_section3">Discussion</string>
+    <string name="title_section4">CME</string>
+    <string name="title_section5">MOH Guidelines</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

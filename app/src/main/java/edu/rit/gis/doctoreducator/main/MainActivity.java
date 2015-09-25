@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity
             case 2:
                 nextFragment = PlaceholderFragment.newInstance(position + 1);
                 break;
+            case 3:
+            case 4:
             default:
                 // ABORT!
                 return;
@@ -97,6 +99,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
+                break;
+            case 4:
+                mTitle = "MOH Guidelines";
                 break;
         }
     }
@@ -152,20 +157,20 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         switch (id) {
-        case R.id.action_settings:
-            return true;
+            case R.id.action_settings:
+                return true;
 
-        case R.id.action_login:
-            startActivity(new Intent(this, LoginActivity.class));
-            break;
+            case R.id.action_login:
+                startActivity(new Intent(this, LoginActivity.class));
+                break;
 
-        case R.id.action_logout:
-            mAccountHelper.logout();
-            break;
+            case R.id.action_logout:
+                mAccountHelper.logout();
+                break;
 
-        case R.id.action_search:
+            case R.id.action_search:
 //            startActivity(new Intent(this, SearchActivity.class));
-            break;
+                break;
         }
 
         return super.onOptionsItemSelected(item);
