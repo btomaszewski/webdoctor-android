@@ -1,4 +1,4 @@
-package edu.rit.gis.doctoreducator;
+package edu.rit.gis.doctoreducator.utils;
 
 import android.util.Log;
 

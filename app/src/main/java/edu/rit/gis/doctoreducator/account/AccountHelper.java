@@ -6,11 +6,10 @@ import android.content.SharedPreferences;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import edu.rit.gis.doctoreducator.IOUtil;
-import edu.rit.gis.doctoreducator.RestHelper;
+import edu.rit.gis.doctoreducator.utils.IOUtil;
+import edu.rit.gis.doctoreducator.utils.RestHelper;
 import edu.rit.gis.doctoreducator.exception.HttpResponseException;
 import edu.rit.gis.doctoreducator.exception.RegistrationException;
 

@@ -5,9 +5,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -15,7 +12,7 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import edu.rit.gis.doctoreducator.AssetManager;
+import edu.rit.gis.doctoreducator.utils.AssetManager;
 import edu.rit.gis.doctoreducator.R;
 import edu.rit.gis.doctoreducator.account.AccountHelper;
 

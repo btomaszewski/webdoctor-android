@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.net.Uri;
-import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
@@ -20,9 +19,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
-import edu.rit.gis.doctoreducator.IOUtil;
-import edu.rit.gis.doctoreducator.R;
-import edu.rit.gis.doctoreducator.RestHelper;
+import edu.rit.gis.doctoreducator.utils.IOUtil;
+import edu.rit.gis.doctoreducator.utils.RestHelper;
 
 /**
  * Provides search support for Wikipedia and related wiki sites which use the WikiMedia API.

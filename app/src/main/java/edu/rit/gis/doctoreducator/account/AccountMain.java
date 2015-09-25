@@ -15,15 +15,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.io.IOException;
-import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
-import java.net.URLClassLoader;
-import java.net.URLConnection;
 
 import edu.rit.gis.doctoreducator.R;
-import edu.rit.gis.doctoreducator.RestHelper;
+import edu.rit.gis.doctoreducator.utils.RestHelper;
 import edu.rit.gis.doctoreducator.main.MainActivity;
 
 /**

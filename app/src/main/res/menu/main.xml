@@ -10,7 +10,8 @@
         app:actionViewClass="android.widget.SearchView" />
 
     <item android:id="@+id/action_account" android:title="@string/action_account"
-        app:showAsAction="never" >
+        app:showAsAction="always"
+        android:icon="@drawable/ic_action_action_account_circle">
         <menu>
             <item android:id="@+id/action_login" android:title="@string/action_login" />
             <item android:id="@+id/action_logout" android:title="@string/action_logout" />
@@ -18,5 +19,6 @@
     </item>
 
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+        android:orderInCategory="100" app:showAsAction="always"
+        android:icon="@drawable/ic_action_action_settings"/>
 </menu>

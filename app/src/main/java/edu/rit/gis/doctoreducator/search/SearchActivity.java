@@ -2,20 +2,14 @@ package edu.rit.gis.doctoreducator.search;
 
 import android.app.Activity;
 import android.app.SearchManager;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.SearchView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,9 +17,8 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Collections;
 
-import edu.rit.gis.doctoreducator.AssetManager;
+import edu.rit.gis.doctoreducator.utils.AssetManager;
 import edu.rit.gis.doctoreducator.R;
 
 public class SearchActivity extends Activity implements

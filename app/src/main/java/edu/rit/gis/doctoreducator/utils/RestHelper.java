@@ -1,10 +1,9 @@
-package edu.rit.gis.doctoreducator;
+package edu.rit.gis.doctoreducator.utils;
 
 import android.content.Context;
 import android.util.Log;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -14,6 +13,7 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.rit.gis.doctoreducator.R;
 import edu.rit.gis.doctoreducator.exception.HttpResponseException;
 
 /**

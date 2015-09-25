@@ -1,8 +1,6 @@
 package edu.rit.gis.doctoreducator.account;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,12 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 
 import edu.rit.gis.doctoreducator.R;
-import edu.rit.gis.doctoreducator.RestHelper;
 import edu.rit.gis.doctoreducator.exception.RegistrationException;
 
 /**
