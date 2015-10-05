@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,8 +24,7 @@ import edu.rit.gis.doctoreducator.account.AccountHelper;
 import edu.rit.gis.doctoreducator.account.LoginActivity;
 import edu.rit.gis.doctoreducator.search.SearchActivity;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     private static String LOG_TAG = "MainActivity";
 
@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -70,23 +72,50 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        Fragment nextFragment = null;
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = null;
         switch (position) {
             case 0:
+                fragment = PlaceholderFragment.newInstance(position + 1);
+
+                break;
             case 1:
+                fragment = PlaceholderFragment.newInstance(position + 1);
+
+                break;
             case 2:
-                nextFragment = PlaceholderFragment.newInstance(position + 1);
+
+                fragment = PlaceholderFragment.newInstance(position + 1);
                 break;
             case 3:
+                fragment = PlaceholderFragment.newInstance(position + 1);
+                break;
             case 4:
+                fragment = PlaceholderFragment.newInstance(position + 1);
+                break;
+            case 5:
+                fragment = PlaceholderFragment.newInstance(position + 1);
+                break;
             default:
                 // ABORT!
                 return;
         }
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, nextFragment)
-                .commit();
+
+        if (fragment != null) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, fragment).commit();
+
+
+        } else {
+            // error in creating fragment
+            Log.e("MainActivity", "Error in creating fragment");
+        }
+
+
+//        FragmentManager fragmentManager = getFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.container, nextFragment)
+//                .commit();
     }
 
     public void onSectionAttached(int number) {
@@ -101,6 +130,8 @@ public class MainActivity extends AppCompatActivity
                 mTitle = getString(R.string.title_section3);
                 break;
             case 4:
+                mTitle = "CME";
+            case 5:
                 mTitle = "MOH Guidelines";
                 break;
         }
@@ -204,7 +235,36 @@ public class MainActivity extends AppCompatActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+            View rootView;
+            switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
+                case 1:
+                    // Home
+                    rootView = inflater.inflate(R.layout.card_layout, container, false);
+                    break;
+                case 2:
+                    // Medical Info
+                    rootView = inflater.inflate(R.layout.card_layout, container, false);
+                    break;
+                case 3:
+                    // Discussion
+                    rootView = inflater.inflate(R.layout.card_layout, container, false);
+                    break;
+                case 4:
+                    // CME
+                    rootView = inflater.inflate(R.layout.card_layout, container, false);
+                    break;
+                case 5:
+                    // MOH Guidelines
+                    rootView = inflater.inflate(R.layout.card_layout, container, false);
+                    break;
+                case 6:
+                    // About
+                    rootView = inflater.inflate(R.layout.card_layout, container, false);
+                    break;
+                default:
+                    rootView = inflater.inflate(R.layout.card_layout, container, false);
+            }
             return rootView;
         }
 
@@ -215,5 +275,4 @@ public class MainActivity extends AppCompatActivity
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
-
 }

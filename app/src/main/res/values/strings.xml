@@ -1,13 +1,13 @@
 <resources>
-    <string name="app_name">DoctorEducator</string>
+    <string name="app_name">Ukuntu</string>
 
     <string name="url_base">http://geoapps64.main.ad.rit.edu:1024/</string>
     <string name="shared_prefs_key">edu.rit.gis.doctoreducator.sharedprefs</string>
 
-    <string name="title_main_activity">Doctor Educator</string>
+    <string name="title_main_activity">Ukuntu</string>
     <string name="action_settings">Settings</string>
 
-    <string name="account_fragment_greet">Welcome to the Web Doctor Educator<br/></string>
+    <string name="account_fragment_greet">Welcome to Ukuntu<br/></string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -83,6 +83,7 @@
     <string name="title_section3">Discussion</string>
     <string name="title_section4">CME</string>
     <string name="title_section5">MOH Guidelines</string>
+    <string name="title_section6">About</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -91,5 +92,15 @@
     <string name="error_passwords_do_not_match">Passwords do not match</string>
     <string name="action_account">Account</string>
     <string name="forgot_password">Forgot Password</string>
+
+    <string-array name="items_array">
+        <item>Home</item>
+        <item>Medical Info</item>
+        <item>Discussion</item>
+        <item>CME</item>
+        <item>MOH Guidelines</item>
+        <item>ABOUT</item>
+    </string-array>
+
 
 </resources>

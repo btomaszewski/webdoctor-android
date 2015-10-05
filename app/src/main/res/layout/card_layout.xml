@@ -1,64 +1,273 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    >
+    android:layout_height="match_parent">
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
+        android:id="@android:id/list"
         android:layout_width="match_parent"
+        android:orientation="vertical"
         android:layout_height="wrap_content"
-        android:id="@+id/cv"
-        >
+        android:padding="16dp">
 
-        <RelativeLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/surgery"
             android:layout_width="match_parent"
-            android:layout_height="240dip"
-            android:padding="16dp"
-            >
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
 
-            <ImageView
-                android:id="@+id/person_photo"
-                android:src="@drawable/symbol"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:scaleType="centerCrop"
-                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dip"
+                android:padding="16dp"
+                android:layout_gravity="center"
+                android:weightSum="6">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/person_name"
-                android:textSize="18sp"
-                android:text="Ingle Auditorium"
-                android:layout_above="@+id/person_age"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/rwanda_logo"
+                    android:layout_weight="1"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/person_age"
-                android:text="Sat Oct 2 @ 3:15pm"
-                android:textSize="16sp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignLeft="@+id/person_name"
-                android:layout_alignStart="@+id/person_name" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/titleText"
-                android:text="Doctor's meet Event"
-                android:textSize="26sp"
-                android:layout_above="@+id/person_name"
-                android:layout_alignLeft="@+id/person_name"
-                android:layout_alignStart="@+id/person_name" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Surgery MOH Guidelines"
+                    android:gravity="center"
+                    android:textSize="22sp"
+                    android:layout_weight="5"/>
 
-        </RelativeLayout>
+            </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
 
-</LinearLayout>
+        <android.support.v7.widget.CardView
+            android:id="@+id/neonatal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dip"
+                android:padding="16dp"
+                android:layout_gravity="center"
+                android:weightSum="6">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/rwanda_logo"
+                    android:layout_weight="1"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Neonatal MOH Guidelines"
+                    android:gravity="center"
+                    android:textSize="22sp"
+                    android:layout_weight="5"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/pain_management"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dip"
+                android:padding="16dp"
+                android:layout_gravity="center"
+                android:weightSum="6">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/rwanda_logo"
+                    android:layout_weight="1"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pain Management MOH Guidelines"
+                    android:gravity="center"
+                    android:textSize="22sp"
+                    android:layout_weight="5"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/internal_medicines"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dip"
+                android:padding="16dp"
+                android:layout_gravity="center"
+                android:weightSum="6">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/rwanda_logo"
+                    android:layout_weight="1"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Internal Medicines MOH Guidelines"
+                    android:textSize="22sp"
+                    android:gravity="center"
+                    android:layout_weight="5"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/pediatrics_emergencies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dip"
+                android:padding="16dp"
+                android:layout_gravity="center"
+                android:weightSum="6">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/rwanda_logo"
+                    android:layout_weight="1"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pediatrics Emergencies MOH Guidelines"
+                    android:textSize="22sp"
+                    android:gravity="center"
+                    android:layout_weight="5"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/gynac"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dip"
+                android:padding="16dp"
+                android:layout_gravity="center"
+                android:weightSum="6">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/rwanda_logo"
+                    android:layout_weight="1"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gynacology and Obstetrics MOH Guidelines"
+                    android:textSize="22sp"
+                    android:gravity="center"
+                    android:layout_weight="5"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/surgical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dip"
+                android:padding="16dp"
+                android:layout_gravity="center"
+                android:weightSum="6">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/rwanda_logo"
+                    android:layout_weight="1"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Surgical MOH Guidelines"
+                    android:textSize="22sp"
+                    android:gravity="center"
+                    android:layout_weight="5"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/pediatrics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dip"
+                android:padding="16dp"
+                android:layout_gravity="center"
+                android:weightSum="6">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/rwanda_logo"
+                    android:layout_weight="1"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pediatrics Guidelines"
+                    android:textSize="22sp"
+                    android:gravity="center"
+                    android:layout_weight="5"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</ScrollView>
 
