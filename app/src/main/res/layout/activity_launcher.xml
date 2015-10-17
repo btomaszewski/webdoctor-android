@@ -5,7 +5,31 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
+    android:background="#e5fcf9"
     tools:context="edu.rit.gis.doctoreducator.main.LaunchActivity">
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/symbol"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ukuntu"
+        android:textSize="42sp"
+        android:gravity="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Developed at RIT"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_gravity="center"/>
 
     <TextView android:text="@string/loading" android:layout_width="wrap_content"
         android:layout_height="wrap_content" android:layout_gravity="center_horizontal"

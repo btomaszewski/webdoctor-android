@@ -1,6 +1,5 @@
 package edu.rit.gis.doctoreducator.main;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.SearchManager;
@@ -11,22 +10,23 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.SearchView;
 
+import edu.rit.gis.doctoreducator.CME.CMEFragment;
+import edu.rit.gis.doctoreducator.MedicalInfo.MedicalInfoFragment;
 import edu.rit.gis.doctoreducator.R;
+import edu.rit.gis.doctoreducator.about.AboutFragment;
 import edu.rit.gis.doctoreducator.account.AccountHelper;
 import edu.rit.gis.doctoreducator.account.LoginActivity;
+import edu.rit.gis.doctoreducator.discussion.DiscussionFragment;
+import edu.rit.gis.doctoreducator.mohguidelines.MOHGuidelinesFragment;
 import edu.rit.gis.doctoreducator.search.SearchActivity;
+import edu.rit.gis.doctoreducator.tip_of_day.TipsFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
-
-    private static String LOG_TAG = "MainActivity";
 
     /**
      * Activities should set this as their result to cause MainActivity
@@ -76,25 +76,22 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = PlaceholderFragment.newInstance(position + 1);
-
+                fragment = new TipsFragment();
                 break;
             case 1:
-                fragment = PlaceholderFragment.newInstance(position + 1);
-
+                fragment = new MedicalInfoFragment();
                 break;
             case 2:
-
-                fragment = PlaceholderFragment.newInstance(position + 1);
+                fragment = new DiscussionFragment();
                 break;
             case 3:
-                fragment = PlaceholderFragment.newInstance(position + 1);
+                fragment = new CMEFragment();
                 break;
             case 4:
-                fragment = PlaceholderFragment.newInstance(position + 1);
+                fragment = new MOHGuidelinesFragment();
                 break;
             case 5:
-                fragment = PlaceholderFragment.newInstance(position + 1);
+                fragment = new AboutFragment();
                 break;
             default:
                 // ABORT!
@@ -105,17 +102,11 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
             fragmentManager.beginTransaction()
                     .replace(R.id.container, fragment).commit();
 
-
         } else {
             // error in creating fragment
             Log.e("MainActivity", "Error in creating fragment");
         }
 
-
-//        FragmentManager fragmentManager = getFragmentManager();
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.container, nextFragment)
-//                .commit();
     }
 
     public void onSectionAttached(int number) {
@@ -167,6 +158,8 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         return super.onCreateOptionsMenu(menu);
     }
 
+
+
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem miLogin = menu.findItem(R.id.action_login);
@@ -205,74 +198,5 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-
-            View rootView;
-            switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
-                case 1:
-                    // Home
-                    rootView = inflater.inflate(R.layout.card_layout, container, false);
-                    break;
-                case 2:
-                    // Medical Info
-                    rootView = inflater.inflate(R.layout.card_layout, container, false);
-                    break;
-                case 3:
-                    // Discussion
-                    rootView = inflater.inflate(R.layout.card_layout, container, false);
-                    break;
-                case 4:
-                    // CME
-                    rootView = inflater.inflate(R.layout.card_layout, container, false);
-                    break;
-                case 5:
-                    // MOH Guidelines
-                    rootView = inflater.inflate(R.layout.card_layout, container, false);
-                    break;
-                case 6:
-                    // About
-                    rootView = inflater.inflate(R.layout.card_layout, container, false);
-                    break;
-                default:
-                    rootView = inflater.inflate(R.layout.card_layout, container, false);
-            }
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
     }
 }

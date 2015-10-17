@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="wrap_content"
+        android:background="#e5fcf9"
         android:padding="16dp">
 
         <android.support.v7.widget.CardView
@@ -24,20 +25,20 @@
                 android:layout_gravity="center"
                 android:weightSum="6">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/rwanda_logo"
-                    android:layout_weight="1"/>
+                <!--<ImageView-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:src="@drawable/rwanda_logo"-->
+                    <!--android:layout_weight="1"/>-->
 
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Surgery MOH Guidelines"
+                    android:layout_height="40dp"
+                    android:text="Surgery"
                     android:gravity="center"
-                    android:textSize="22sp"
-                    android:layout_weight="5"/>
+                    android:textSize="20sp"
+                    android:layout_weight="6"/>
 
             </LinearLayout>
 
@@ -56,20 +57,20 @@
                 android:layout_gravity="center"
                 android:weightSum="6">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/rwanda_logo"
-                    android:layout_weight="1"/>
+                <!--<ImageView-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:src="@drawable/rwanda_logo"-->
+                    <!--android:layout_weight="1"/>-->
 
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Neonatal MOH Guidelines"
+                    android:layout_height="40dp"
+                    android:text="Neonatal"
                     android:gravity="center"
-                    android:textSize="22sp"
-                    android:layout_weight="5"/>
+                    android:textSize="20sp"
+                    android:layout_weight="6"/>
 
             </LinearLayout>
 
@@ -88,20 +89,20 @@
                 android:layout_gravity="center"
                 android:weightSum="6">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/rwanda_logo"
-                    android:layout_weight="1"/>
+                <!--<ImageView-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:src="@drawable/rwanda_logo"-->
+                    <!--android:layout_weight="1"/>-->
 
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pain Management MOH Guidelines"
+                    android:layout_height="40dp"
+                    android:text="Pain Management"
                     android:gravity="center"
-                    android:textSize="22sp"
-                    android:layout_weight="5"/>
+                    android:textSize="20sp"
+                    android:layout_weight="6"/>
 
             </LinearLayout>
 
@@ -120,20 +121,20 @@
                 android:layout_gravity="center"
                 android:weightSum="6">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/rwanda_logo"
-                    android:layout_weight="1"/>
+                <!--<ImageView-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:src="@drawable/rwanda_logo"-->
+                    <!--android:layout_weight="1"/>-->
 
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Internal Medicines MOH Guidelines"
-                    android:textSize="22sp"
+                    android:layout_height="40dp"
+                    android:text="Internal Medicines"
+                    android:textSize="20sp"
                     android:gravity="center"
-                    android:layout_weight="5"/>
+                    android:layout_weight="6"/>
 
             </LinearLayout>
 
@@ -152,20 +153,20 @@
                 android:layout_gravity="center"
                 android:weightSum="6">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/rwanda_logo"
-                    android:layout_weight="1"/>
+                <!--<ImageView-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:src="@drawable/rwanda_logo"-->
+                    <!--android:layout_weight="1"/>-->
 
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pediatrics Emergencies MOH Guidelines"
-                    android:textSize="22sp"
+                    android:layout_height="40dp"
+                    android:text="Pediatrics Emergencies"
+                    android:textSize="20sp"
                     android:gravity="center"
-                    android:layout_weight="5"/>
+                    android:layout_weight="6"/>
 
             </LinearLayout>
 
@@ -184,20 +185,20 @@
                 android:layout_gravity="center"
                 android:weightSum="6">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/rwanda_logo"
-                    android:layout_weight="1"/>
+                <!--<ImageView-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:src="@drawable/rwanda_logo"-->
+                    <!--android:layout_weight="1"/>-->
 
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Gynacology and Obstetrics MOH Guidelines"
-                    android:textSize="22sp"
+                    android:layout_height="40dp"
+                    android:text="Gynacology and Obstetrics"
+                    android:textSize="20sp"
                     android:gravity="center"
-                    android:layout_weight="5"/>
+                    android:layout_weight="6"/>
 
             </LinearLayout>
 
@@ -216,20 +217,20 @@
                 android:layout_gravity="center"
                 android:weightSum="6">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/rwanda_logo"
-                    android:layout_weight="1"/>
+                <!--<ImageView-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:src="@drawable/rwanda_logo"-->
+                    <!--android:layout_weight="1"/>-->
 
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Surgical MOH Guidelines"
-                    android:textSize="22sp"
+                    android:layout_height="40dp"
+                    android:text="Surgical"
+                    android:textSize="20sp"
                     android:gravity="center"
-                    android:layout_weight="5"/>
+                    android:layout_weight="6"/>
 
             </LinearLayout>
 
@@ -248,20 +249,20 @@
                 android:layout_gravity="center"
                 android:weightSum="6">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/rwanda_logo"
-                    android:layout_weight="1"/>
+                <!--<ImageView-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:src="@drawable/rwanda_logo"-->
+                    <!--android:layout_weight="1"/>-->
 
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pediatrics Guidelines"
-                    android:textSize="22sp"
+                    android:layout_height="40dp"
+                    android:text="Pediatrics"
+                    android:textSize="20sp"
                     android:gravity="center"
-                    android:layout_weight="5"/>
+                    android:layout_weight="6"/>
 
             </LinearLayout>
 

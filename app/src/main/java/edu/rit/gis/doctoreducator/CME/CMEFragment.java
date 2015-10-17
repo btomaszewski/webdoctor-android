@@ -16,7 +16,7 @@ public class CMEFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.card_layout, container, false);
+        View rootView = inflater.inflate(R.layout.cme_layout, container, false);
         return rootView;
     }
 }

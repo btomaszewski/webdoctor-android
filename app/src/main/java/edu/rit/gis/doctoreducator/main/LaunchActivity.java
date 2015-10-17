@@ -2,8 +2,10 @@ package edu.rit.gis.doctoreducator.main;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -34,7 +36,7 @@ public class LaunchActivity extends Activity {
      *
      * Current tasks: Wait task, Downloading assets, authentication check
      */
-    private static final int NUMBER_OF_TASKS = 3;
+    private static final int NUMBER_OF_TASKS = 2; //3;
 
     /** Are we logged in already? */
     private boolean mIsLoggedIn = false;
@@ -51,6 +53,17 @@ public class LaunchActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
 
+//        SharedPreferences score = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+//        SharedPreferences.Editor score_inc = score.edit();
+//        int counter = score.getInt("counter",0);
+//        float font_size = score.getFloat("font_size",20.0f);
+//        if(counter == 0) {
+//            //Put your function to copy files here
+//            score_inc.putInt("counter", ++counter);
+//            score_inc.commit();
+//            Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+//        }
+
         // Set task count so afterTask() works
         mTaskCount = new AtomicInteger(NUMBER_OF_TASKS);
 
@@ -60,13 +73,14 @@ public class LaunchActivity extends Activity {
         waitTask.start();
 
         // next start a background task to download assets
-        DownloadAllAssetsTask downloadTask = new DownloadAllAssetsTask();
-        downloadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//        DownloadAllAssetsTask downloadTask = new DownloadAllAssetsTask();
+//        downloadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
         // finally start the task to see if we can authenticate with the server
         CheckAuthTask authTask = new CheckAuthTask();
         authTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
+
 
     /**
      * Called after a background task is complete. ONLY call this from the UI thread.
@@ -82,40 +96,40 @@ public class LaunchActivity extends Activity {
         }
     }
 
-    private class DownloadAllAssetsTask extends AsyncTask<Void, Boolean, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            makeToast(R.string.downloading_content).show();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            try {
-                AssetManager assetManager = AssetManager.createInstance(
-                        LaunchActivity.this);
-                assetManager.updateAllAssets();
-            } catch (IOException |JSONException e) {
-                // if something goes wrong we simply continue like we're done
-                // and just continue on with what we have
-                Log.e(LOG_TAG, e.getMessage(), e);
-                cancel(false);
-            }
-            return null;
-        }
-
-        @Override
-        protected void onCancelled() {
-            makeToast(R.string.download_failed).show();
-            afterTask();
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            makeToast(R.string.download_success).show();
-            afterTask();
-        }
-    }
+//    private class DownloadAllAssetsTask extends AsyncTask<Void, Boolean, Void> {
+//
+//        @Override
+//        protected void onPreExecute() {
+//            makeToast(R.string.downloading_content).show();
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Void... params) {
+//            try {
+//                AssetManager assetManager = AssetManager.createInstance(
+//                        LaunchActivity.this);
+//                assetManager.updateAllAssets();
+//            } catch (IOException |JSONException e) {
+//                // if something goes wrong we simply continue like we're done
+//                // and just continue on with what we have
+//                Log.e(LOG_TAG, e.getMessage(), e);
+//                cancel(false);
+//            }
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onCancelled() {
+//            makeToast(R.string.download_failed).show();
+//            afterTask();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void result) {
+//            makeToast(R.string.download_success).show();
+//            afterTask();
+//        }
+//    }
 
     /**
      * A thread which waits for {@code WAIT_TIME} milliseconds before calling
