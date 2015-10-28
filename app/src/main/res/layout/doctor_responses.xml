@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/doctor1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:padding="16dp"
+                android:weightSum="6">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!--<ImageView-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:src="@drawable/rwanda_logo" />-->
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Dr. Chris John Rusatira"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="University of Rwanda"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Tel: +25078844429"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Email: usatirac2001@gmail.com"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/doctor2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:padding="16dp"
+                android:weightSum="6">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!--<ImageView-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:src="@drawable/rwanda_logo" />-->
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Dr. Brian Tomaszewski"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Rochester Institute of Technology"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Tel: +25078844429"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Email: bmtski@rit.edu"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/doctor3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:padding="16dp"
+                android:weightSum="6">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!--<ImageView-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:src="@drawable/rwanda_logo" />-->
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Siddesh Pillai"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Rochester Institute of Technology"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Tel: +25078844429"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Email: srp4698@rit.edu"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/doctor4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:padding="16dp"
+                android:weightSum="6">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!--<ImageView-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:src="@drawable/rwanda_logo" />-->
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Dr. Gregory House"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Princeton–Plainsboro Teaching Hospital"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Tel: +25078844429"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Email: dr.house@gmail.com"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/doctor5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:padding="16dp"
+                android:weightSum="6">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!--<ImageView-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:src="@drawable/rwanda_logo" />-->
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Dr. Rebecca Sam"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="King Faisal Hospital"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Tel: +25078844429"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Email: rbx@gmail.com"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/doctor6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:padding="16dp"
+                android:weightSum="6">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!--<ImageView-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:src="@drawable/rwanda_logo" />-->
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Dr. Shane Bond"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="University of Rwanda"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Tel: +25078844429"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_weight="6"
+                        android:gravity="left"
+                        android:text="Email: usatirac2001@gmail.com"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</ScrollView>
+

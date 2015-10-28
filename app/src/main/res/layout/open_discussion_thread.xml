@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/threadTitle"
+        android:textSize="22sp"
+        android:gravity="center"
+        android:text="Discussion Thread Title"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Discussion Body"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:id="@+id/threadBody"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Author Name"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:id="@+id/threadAuthor"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:id="@+id/viewAllComment"
+        android:scrollbars="vertical"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Make Comment"
+        android:gravity="center"
+        android:id="@+id/makeComment"/>
+
+    <Button
+        android:id="@+id/comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Comment"/>
+
+
+</LinearLayout>

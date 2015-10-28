@@ -24,7 +24,7 @@ import edu.rit.gis.doctoreducator.account.LoginActivity;
 import edu.rit.gis.doctoreducator.discussion.DiscussionFragment;
 import edu.rit.gis.doctoreducator.mohguidelines.MOHGuidelinesFragment;
 import edu.rit.gis.doctoreducator.search.SearchActivity;
-import edu.rit.gis.doctoreducator.tip_of_day.TipsFragment;
+import edu.rit.gis.doctoreducator.tip_of_day.HomeFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new TipsFragment();
+                fragment = new HomeFragment();
                 break;
             case 1:
                 fragment = new MedicalInfoFragment();
@@ -107,25 +107,6 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
             Log.e("MainActivity", "Error in creating fragment");
         }
 
-    }
-
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
-            case 4:
-                mTitle = "CME";
-            case 5:
-                mTitle = "MOH Guidelines";
-                break;
-        }
     }
 
     public void restoreActionBar() {
@@ -162,13 +143,13 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem miLogin = menu.findItem(R.id.action_login);
-        MenuItem miLogout = menu.findItem(R.id.action_logout);
-        if (miLogin != null) {
-            boolean auth = mAccountHelper.isAuthenticated();
-            miLogin.setVisible(!auth);
-            miLogout.setVisible(auth);
-        }
+//        MenuItem miLogin = menu.findItem(R.id.action_login);
+//        MenuItem miLogout = menu.findItem(R.id.action_logout);
+//        if (miLogin != null) {
+//            boolean auth = mAccountHelper.isAuthenticated();
+//            miLogin.setVisible(!auth);
+//            miLogout.setVisible(auth);
+//        }
 
         return super.onPrepareOptionsMenu(menu);
     }
@@ -181,16 +162,17 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         int id = item.getItemId();
 
         switch (id) {
-            case R.id.action_settings:
-                return true;
 
-            case R.id.action_login:
-                startActivity(new Intent(this, LoginActivity.class));
-                break;
+//            case R.id.action_login:
+//                startActivity(new Intent(this, LoginActivity.class));
+//                break;
+//
+//            case R.id.action_logout:
+//                mAccountHelper.logout();
+//                break;
 
-            case R.id.action_logout:
-                mAccountHelper.logout();
-                break;
+            case R.id.action_home:
+                startActivity(new Intent(this, MainActivity.class));
 
             case R.id.action_search:
 //            startActivity(new Intent(this, SearchActivity.class));
@@ -198,5 +180,14 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed(){
+        if (getFragmentManager().getBackStackEntryCount() == 0){
+            super.onBackPressed();
+        } else {
+            getFragmentManager().popBackStack();
+        }
     }
 }

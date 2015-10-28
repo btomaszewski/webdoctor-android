@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@android:id/list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,11 +6,13 @@
     android:background="#000000"
     android:padding="16dp">
 
-    <fragment
+    <com.esri.android.map.MapView
         android:id="@+id/map"
-        android:name="com.google.android.gms.maps.MapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MapsFragment" />
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        mapoptions.MapType="STREETS"
+        mapoptions.center="-1.9439, 30.0595"
+        mapoptions.ZoomLevel="16">
+    </com.esri.android.map.MapView>
 
 </LinearLayout>

@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/hospital1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:padding="16dp"
+                android:weightSum="6">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="24dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="Kibogora Hospital"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="22dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="Main Street, Kigali Downtown"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="Tel: +25078844429"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="Email: Kibogora@gmail.com"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_call" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_myplaces" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/hospital2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:padding="16dp"
+                android:weightSum="6">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="24dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="King Faisal Hospital"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="22dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="Main Street, Kigali Downtown"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="Tel: +25078844429"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="Email: kingfaisalhospital@gmail.com"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_call" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_myplaces" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/hospital3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:padding="16dp"
+                android:weightSum="6">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="24dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="University Teaching Hospital of Kigali"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="22dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="Main Street, Kigali Downtown"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="Tel: +25078844429"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="Email: uthkigali@gmail.com"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_call" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_myplaces" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/hospital4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:padding="16dp"
+                android:weightSum="6">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="24dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="Butaro Hospital"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="22dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="Princeton–Plainsboro, Kigali"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="Tel: +25078844429"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="Email: dr.house@gmail.com"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_call" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_myplaces" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/hospital5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:padding="16dp"
+                android:weightSum="6">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="24dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="Gihundwe District Hospital"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="22dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="King Faisal Hospital"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="Tel: +25078844429"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="Email: gdh@gmail.com"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_call" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_myplaces" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/hospital6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:padding="16dp"
+                android:weightSum="6">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="24dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="Shyira Hospital"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="22dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="University of Rwanda"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="Tel: +25078844429"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="6"
+                            android:gravity="left"
+                            android:text="Email: usatirac2001@gmail.com"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_call" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_myplaces" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</ScrollView>
+

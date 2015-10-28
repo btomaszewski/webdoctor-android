@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contents"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:hint="Title"
+            android:gravity="center"
+            android:id="@+id/discussion_title"
+            android:layout_below="@+id/linearLayout"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:id="@+id/discussion_body"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:hint="Body"
+            android:gravity="center" />
+
+        <EditText
+            android:id="@+id/discussion_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:hint="Name"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/create_discussion_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create discussion thread"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
