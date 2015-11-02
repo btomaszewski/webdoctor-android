@@ -1,5 +1,5 @@
 # VuraWiga - An educator tool for medical professionals.
-The backend of this is designed with the django-webdoctor-server and node-webdoctor-server which can be found [django-server](https://github.com/btomaszewski/webdoctor-server/) and [node-server](http://webdoctor-discussions.rhcloud.com/).
+You can find the preview version of the app [here](http://geoapps64.main.ad.rit.edu/rwanda/ukuntu/)
 
 ## Purpose
 The purpose of the VuraWiga is to help doctors in Rwanda by providing a single
@@ -9,6 +9,9 @@ application which includes many of the tasks they use daily. Currently the goals
    PDF files, Medscape, New England Journals of Medicine etc.) and displays those results in one list
  - Discussion board where doctors can communicate about the issues they are treating and
    ask for help and advice from other doctors using the system.
+
+## Backend
+The backend of this is designed with the django-webdoctor-server and node-webdoctor-server which can be found [django-server](https://github.com/btomaszewski/webdoctor-server/) and [node-server](http://webdoctor-discussions.rhcloud.com/).
 
 ## Libraries
 - WDE uses the excellent [MuPDF library](http://mupdf.com/) to load and render PDF files.
