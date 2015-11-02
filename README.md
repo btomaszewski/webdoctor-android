@@ -1,18 +1,17 @@
-# Web Doctor Educator (WDE) Android App
-This Android app is designed to be compatible with the webdoctor-server which can be found
-[here](https://github.com/btomaszewski/webdoctor-server/).
+# VuraWiga - An educator tool for medical professionals.
+The backend of this is designed with the django-webdoctor-server and node-webdoctor-server which can be found [django-server](https://github.com/btomaszewski/webdoctor-server/) and [node-server](http://webdoctor-discussions.rhcloud.com/).
 
 ## Purpose
-The purpose of the WDE is to help doctors in Rwanda by providing a single
+The purpose of the VuraWiga is to help doctors in Rwanda by providing a single
 application which includes many of the tasks they use daily. Currently the goals are as follows:
 
  - Search system which collects results from disparate sources (e.g. Google, Wikipedia, on-device
-   PDF files, etc.) and displays those results in one list
+   PDF files, Medscape, New England Journals of Medicine etc.) and displays those results in one list
  - Discussion board where doctors can communicate about the issues they are treating and
    ask for help and advice from other doctors using the system.
 
 ## Libraries
-WDE uses the excellent [MuPDF library](http://mupdf.com/) to load and render PDF files.
+- WDE uses the excellent [MuPDF library](http://mupdf.com/) to load and render PDF files.
 The downside to this is that we have to include native libraries. Precompiled binaries
 can be found under `app/src/main/jniLibs/` where the Android build system will automatically
 detect them and add them to the application. The downside is that this makes the app very large.
@@ -23,5 +22,7 @@ folder to contain the armeabi-v7a folder with libmupdf.so in it. If you're testi
 emulator or tablet then you'll want the x86 folder. Remember that each library in the jniLibs
 folder increases the apk size by about 7 MB and increases the time it takes to upload to the test
 device.
+- Jsoup to scrap data from the websites.
+- YoutubeAndroidPlayer to play youtube video channels.
 
 
