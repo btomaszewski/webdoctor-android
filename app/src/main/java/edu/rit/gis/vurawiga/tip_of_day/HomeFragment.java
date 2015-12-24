@@ -31,13 +31,13 @@ public class HomeFragment extends Fragment {
         medscapeSearch = (CardView) rootView.findViewById(R.id.medi_search);
         ncbiSearch = (CardView) rootView.findViewById(R.id.article_search);
 
-        tipOfDay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), TipOfTheDay.class);
-                startActivity(intent);
-            }
-        });
+//        tipOfDay.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(), TipOfTheDay.class);
+//                startActivity(intent);
+//            }
+//        });
 
         viewLatestDiscussions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,13 +67,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        eventsPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), EventsActivity.class);
-                startActivity(intent);
-            }
-        });
+//        eventsPage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(), EventsActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         medscapeSearch.setOnClickListener(new View.OnClickListener() {
             @Override

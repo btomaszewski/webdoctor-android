@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
                 fragment = new DiscussionFragment();
                 break;
             case 3:
-                fragment = new CMEFragment();
+//                fragment = new CMEFragment();
                 break;
             case 4:
                 fragment = new MOHGuidelinesFragment();
