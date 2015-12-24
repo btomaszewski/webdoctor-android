@@ -16,7 +16,7 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Scroller;
 
-import edu.rit.gis.doctoreducator.R;
+import edu.rit.gis.vurawiga.R;
 
 public class ReaderView
 		extends AdapterView<Adapter>

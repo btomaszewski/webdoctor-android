@@ -21,7 +21,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.ListView;
 
-import edu.rit.gis.doctoreducator.R;
+import edu.rit.gis.vurawiga.R;
 
 enum Purpose {
 	PickPDF,

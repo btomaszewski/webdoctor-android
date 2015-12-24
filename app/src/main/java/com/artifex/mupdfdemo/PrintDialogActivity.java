@@ -9,12 +9,11 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Base64;
-import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import edu.rit.gis.doctoreducator.R;
+import edu.rit.gis.vurawiga.R;
 
 public class PrintDialogActivity extends Activity {
 	private static final String PRINT_DIALOG_URL = "https://www.google.com/cloudprint/dialog.html";

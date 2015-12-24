@@ -7,7 +7,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="edu.rit.gis.doctoreducator.account.AccountMain"
+    tools:context="edu.rit.gis.vurawiga.account.AccountMain"
     android:gravity="center"
     android:dividerPadding="@dimen/abc_text_size_menu_material">
 

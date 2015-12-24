@@ -4,11 +4,10 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
-import edu.rit.gis.doctoreducator.R;
+import edu.rit.gis.vurawiga.R;
 
 public class MuPDFCore
 {

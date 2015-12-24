@@ -2,8 +2,6 @@ package com.artifex.mupdfdemo;
 
 import java.util.ArrayList;
 
-import com.artifex.mupdfdemo.MuPDFCore.Cookie;
-
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.ClipData;
@@ -21,7 +19,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 
-import edu.rit.gis.doctoreducator.R;
+import edu.rit.gis.vurawiga.R;
 
 /* This enum should be kept in line with the cooresponding C enum in mupdf.c */
 enum SignatureState {

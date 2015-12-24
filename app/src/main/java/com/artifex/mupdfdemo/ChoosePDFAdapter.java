@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import edu.rit.gis.doctoreducator.R;
+import edu.rit.gis.vurawiga.R;
 
 public class ChoosePDFAdapter extends BaseAdapter {
 	private final LinkedList<ChoosePDFItem> mItems;

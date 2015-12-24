@@ -6,7 +6,7 @@ import android.animation.AnimatorSet;
 import android.app.Activity;
 import android.view.View;
 
-import edu.rit.gis.doctoreducator.R;
+import edu.rit.gis.vurawiga.R;
 
 public class SafeAnimatorInflater
 {

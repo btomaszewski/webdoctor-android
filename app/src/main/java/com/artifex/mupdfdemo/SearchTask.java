@@ -7,7 +7,7 @@ import android.content.DialogInterface;
 import android.graphics.RectF;
 import android.os.Handler;
 
-import edu.rit.gis.doctoreducator.R;
+import edu.rit.gis.vurawiga.R;
 
 class ProgressDialogX extends ProgressDialog {
 	public ProgressDialogX(Context context) {

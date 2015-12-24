@@ -21,7 +21,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import edu.rit.gis.doctoreducator.R;
+import edu.rit.gis.vurawiga.R;
 
 // Make our ImageViews opaque to optimize redraw
 class OpaqueImageView extends ImageView {

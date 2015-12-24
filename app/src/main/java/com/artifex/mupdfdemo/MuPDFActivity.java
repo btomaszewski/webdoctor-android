@@ -3,8 +3,6 @@ package com.artifex.mupdfdemo;
 import java.io.InputStream;
 import java.util.concurrent.Executor;
 
-import com.artifex.mupdfdemo.ReaderView.ViewMapper;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -35,7 +33,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
 
-import edu.rit.gis.doctoreducator.R;
+import edu.rit.gis.vurawiga.R;
 
 class ThreadPerTaskExecutor implements Executor {
 	public void execute(Runnable r) {

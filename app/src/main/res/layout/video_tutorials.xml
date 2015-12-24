@@ -13,8 +13,7 @@
         android:id="@+id/youtube_player"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
-        android:padding="5dp" />
+        android:background="#fff" />
 
     <ScrollView
         android:layout_width="match_parent"

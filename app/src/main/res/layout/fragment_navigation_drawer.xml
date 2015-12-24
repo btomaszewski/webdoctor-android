@@ -7,4 +7,4 @@
     android:divider="@android:color/transparent"
     android:dividerHeight="0dp"
     android:background="#000"
-    tools:context="edu.rit.gis.doctoreducator.main.NavigationDrawerFragment" />
+    tools:context="edu.rit.gis.vurawiga.main.NavigationDrawerFragment" />
